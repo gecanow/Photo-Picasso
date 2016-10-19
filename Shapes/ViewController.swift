@@ -52,5 +52,10 @@ class ViewController: UIViewController {
         myDrawView.setNeedsDisplay()
     }
     
+    @IBAction func onTappedClear(_ sender: AnyObject) {
+        myDrawView.points = [Line]()
+        myDrawView.setNeedsDisplay()
+    }
+    
 }
 

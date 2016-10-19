@@ -20,31 +20,78 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPD-SL-DyW" customClass="DrawView" customModule="Shapes" customModuleProvider="target">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPr-El-Yrp">
+                                        <frame key="frameInset" minX="8" minY="8" width="46" height="30"/>
+                                        <state key="normal" title="Clear"/>
+                                        <connections>
+                                            <action selector="onTappedClear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2f-6I-owK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="cPr-El-Yrp" firstAttribute="top" secondItem="RPD-SL-DyW" secondAttribute="top" constant="8" id="QQd-V2-ELE"/>
+                                    <constraint firstItem="cPr-El-Yrp" firstAttribute="leading" secondItem="RPD-SL-DyW" secondAttribute="leading" constant="8" id="xLp-Fj-QzN"/>
+                                </constraints>
                             </view>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-H4-IPi">
-                                <connections>
-                                    <action selector="onSwitched:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mnp-LG-z3a"/>
-                                </connections>
-                            </switch>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aAl-iM-weC">
-                                <connections>
-                                    <action selector="onSlide:" destination="BYZ-38-t0r" eventType="valueChanged" id="Fdg-Un-yWe"/>
-                                </connections>
-                            </slider>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kl8-3r-BmM">
+                                <frame key="frameInset" minX="186" minY="603" width="172" height="45"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37o-FC-mzY">
+                                        <frame key="frameInset" minX="70" width="34" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aAl-iM-weC">
+                                        <frame key="frameInset" minX="-1" minY="15" width="175" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="171" id="y0R-e0-bwJ"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="onSlide:" destination="BYZ-38-t0r" eventType="valueChanged" id="Fdg-Un-yWe"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="172" id="P7N-RN-iBv"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3AF-oT-wVU" userLabel="Eraser">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Eraser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO7-FO-JXh">
+                                        <frame key="frameInset" width="49" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-H4-IPi">
+                                        <frame key="frameInset" minY="15" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="onSwitched:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mnp-LG-z3a"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="EaD-Dt-gEh"/>
+                                    <constraint firstAttribute="height" constant="46" id="bFG-gT-SA5"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="RPD-SL-DyW" firstAttribute="top" secondItem="aAl-iM-weC" secondAttribute="bottom" constant="9" id="9TQ-7H-dvY"/>
-                            <constraint firstItem="cAd-H4-IPi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ESv-ph-ZRQ"/>
-                            <constraint firstItem="cAd-H4-IPi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="17" id="SSE-4R-VY9"/>
-                            <constraint firstItem="RPD-SL-DyW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WqR-y0-eae"/>
-                            <constraint firstItem="aAl-iM-weC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="17" id="e40-0Q-sZb"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RPD-SL-DyW" secondAttribute="bottom" id="hbF-UE-A9b"/>
-                            <constraint firstItem="aAl-iM-weC" firstAttribute="leading" secondItem="cAd-H4-IPi" secondAttribute="trailing" constant="65" id="kn5-FZ-fZS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aAl-iM-weC" secondAttribute="trailing" constant="115" id="lAu-p6-SCX"/>
-                            <constraint firstAttribute="trailing" secondItem="RPD-SL-DyW" secondAttribute="trailing" id="wvp-cO-bjE"/>
+                            <constraint firstItem="3AF-oT-wVU" firstAttribute="top" secondItem="RPD-SL-DyW" secondAttribute="bottom" constant="10" id="0zg-sE-jze"/>
+                            <constraint firstItem="Kl8-3r-BmM" firstAttribute="top" secondItem="RPD-SL-DyW" secondAttribute="bottom" constant="11" id="7Se-eW-VOJ"/>
+                            <constraint firstItem="RPD-SL-DyW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="83H-bL-UD0"/>
+                            <constraint firstAttribute="trailing" secondItem="RPD-SL-DyW" secondAttribute="trailing" id="8oF-jO-QNt"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3AF-oT-wVU" secondAttribute="bottom" constant="19" id="Bb0-iO-RN7"/>
+                            <constraint firstItem="RPD-SL-DyW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GPC-yw-zsj"/>
+                            <constraint firstItem="3AF-oT-wVU" firstAttribute="top" secondItem="RPD-SL-DyW" secondAttribute="bottom" constant="10" id="Y5p-w9-EB5"/>
+                            <constraint firstItem="Kl8-3r-BmM" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="gcU-ZC-QO6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Kl8-3r-BmM" secondAttribute="bottom" constant="19" id="jr2-n5-FOP"/>
+                            <constraint firstItem="3AF-oT-wVU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="kcl-Dy-Ibt"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="VJM-TN-Urt" appends="YES" id="FPS-TV-cvv"/>
@@ -61,7 +108,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-79.200000000000003" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-154.40000000000001" y="129.98500749625188"/>
         </scene>
     </scenes>
 </document>
