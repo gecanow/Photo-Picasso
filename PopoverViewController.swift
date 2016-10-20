@@ -16,12 +16,21 @@ class PopoverViewController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
+    @IBOutlet weak var redLabel: UILabel!
+    @IBOutlet weak var greenLabel: UILabel!
+    @IBOutlet weak var blueLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = color.getColor()
+        
         redSlider.value = Float(color.red)
         greenSlider.value = Float(color.green)
         blueSlider.value = Float(color.blue)
+        
+        redLabel.layer.cornerRadius = 5
+        greenLabel.layer.cornerRadius = 5
+        blueLabel.layer.cornerRadius = 5
     }
     
     
@@ -38,10 +47,5 @@ class PopoverViewController: UIViewController {
     @IBAction func onBlueSlide(_ sender: UISlider) {
         color.blue = CGFloat(sender.value)
         self.view.backgroundColor = color.getColor()
-    }
-    
-    
-    func onTappedButton(sender: UIButton!) {
-        self.performSegue(withIdentifier: "unwindSegue", sender: self)
     }
 }

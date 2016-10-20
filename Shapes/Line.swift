@@ -14,11 +14,19 @@ class Line: NSObject {
     var end : CGPoint!
     var color = UIColor.black
     var thickness = 3.0
+    var isEraser = false
     
     init(begin: CGPoint, close: CGPoint, color: UIColor, width: Double) {
         start = begin
         end = close
         self.color = color
         thickness = width
+    }
+    
+    init(begin: CGPoint, close: CGPoint, width: Double, eraser: Bool) {
+        start = begin
+        end = close
+        thickness = width
+        isEraser = eraser
     }
 }

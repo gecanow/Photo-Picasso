@@ -23,7 +23,12 @@ class DrawView: UIView {
             context?.beginPath()
             for line in points {
                 context?.setLineWidth(CGFloat(line.thickness))
-                context?.setStrokeColor(line.color.cgColor)
+                
+                if line.isEraser {
+                    context?.setStrokeColor((self.backgroundColor?.cgColor)!)
+                } else {
+                    context?.setStrokeColor(line.color.cgColor)
+                }
                 context?.move(to: line.start)
                 context?.addLine(to: line.end)
                 context?.strokePath()

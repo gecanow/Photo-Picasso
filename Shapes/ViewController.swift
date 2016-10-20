@@ -12,6 +12,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     
     @IBOutlet weak var myDrawView: DrawView!
     @IBOutlet weak var penColorButton: UIButton!
+    @IBOutlet weak var canvasColorButton: UIButton!
+    @IBOutlet weak var toolBox: UILabel!
     
     var startPoint : CGPoint!
     var endPoint : CGPoint!
@@ -20,13 +22,24 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var thickness = 3.0
     
     var penColor = Color(r: 0, g: 0, b: 0)
-    var canvasColor = Color(r: 0.5, g: 0.5, b: 0.5)
+    var canvasColor = Color(r: 0.8, g: 0.8, b: 0.8)
+    
+    var isPenColor = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         myDrawView.backgroundColor = canvasColor.getColor()
-        penColorButton.backgroundColor = penColor.getColor()
-        print("here")
+        
+        penColorButton.layer.borderWidth = 2
+        penColorButton.layer.cornerRadius = 5
+        penColorButton.layer.backgroundColor = penColor.getColor().cgColor
+        
+        canvasColorButton.layer.borderWidth = 2
+        canvasColorButton.layer.cornerRadius = 5
+        canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
+        
+        myDrawView.layer.cornerRadius = 7
+        toolBox.layer.cornerRadius = 7
     }
     
     @IBAction func onSwitched(_ sender: UISwitch) {
@@ -49,7 +62,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         endPoint = sender.location(in: myDrawView)
         
         if eraser {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: myDrawView.backgroundColor!, width: thickness))
+            myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true))
         } else {
             myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness))
         }
@@ -63,20 +76,27 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         myDrawView.setNeedsDisplay()
     }
     
+    @IBAction func onTappedPenColor(_ sender: AnyObject) {
+        isPenColor = true
+    }
+    
+    @IBAction func onTappedCanvasColor(_ sender: AnyObject) {
+        isPenColor = false
+    }
+    
     //=================================================
     // segues
     //=================================================
-    
-    @IBAction func prepareForUnwind(unwindSegue: UIStoryboardSegue) {
-        let mvc = unwindSegue.source as! PopoverViewController
-        penColor = mvc.color
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dvc = segue.destination as! PopoverViewController
         dvc.modalPresentationStyle = UIModalPresentationStyle.popover
         dvc.popoverPresentationController!.delegate = self
-        dvc.color = penColor
+        
+        if isPenColor {
+            dvc.color = penColor
+        } else {
+            dvc.color = canvasColor
+        }
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle
@@ -84,5 +104,18 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         return .none
     }
     
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        
+        let ppc = popoverPresentationController.presentedViewController as! PopoverViewController
+        
+        if isPenColor {
+            penColor = ppc.color
+            penColorButton.layer.backgroundColor = penColor.getColor().cgColor
+        } else {
+            canvasColor = ppc.color
+            canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
+            myDrawView.backgroundColor = canvasColor.getColor()
+        }
+    }
 }
 
