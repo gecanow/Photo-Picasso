@@ -15,6 +15,8 @@
 		8804BC3B1DB56AF2005114EE /* ShapesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804BC3A1DB56AF2005114EE /* ShapesTests.swift */; };
 		8804BC461DB56AF2005114EE /* ShapesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804BC451DB56AF2005114EE /* ShapesUITests.swift */; };
 		8804BC541DB57177005114EE /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804BC531DB57177005114EE /* DrawView.swift */; };
+		8805EAC81DB81C4F002363EF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805EAC71DB81C4F002363EF /* PopoverViewController.swift */; };
+		8805EACA1DB86707002363EF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805EAC91DB86707002363EF /* Color.swift */; };
 		88B2A3501DB6C5BB00B2586C /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B2A34F1DB6C5BB00B2586C /* Line.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		8804BC451DB56AF2005114EE /* ShapesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesUITests.swift; sourceTree = "<group>"; };
 		8804BC471DB56AF2005114EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8804BC531DB57177005114EE /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		8805EAC71DB81C4F002363EF /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = ../PopoverViewController.swift; sourceTree = "<group>"; };
+		8805EAC91DB86707002363EF /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		88B2A34F1DB6C5BB00B2586C /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +107,8 @@
 			children = (
 				8804BC251DB56AF2005114EE /* AppDelegate.swift */,
 				8804BC271DB56AF2005114EE /* ViewController.swift */,
+				8805EAC71DB81C4F002363EF /* PopoverViewController.swift */,
+				8805EAC91DB86707002363EF /* Color.swift */,
 				8804BC531DB57177005114EE /* DrawView.swift */,
 				88B2A34F1DB6C5BB00B2586C /* Line.swift */,
 				8804BC291DB56AF2005114EE /* Main.storyboard */,
@@ -267,8 +273,10 @@
 			files = (
 				8804BC281DB56AF2005114EE /* ViewController.swift in Sources */,
 				88B2A3501DB6C5BB00B2586C /* Line.swift in Sources */,
+				8805EAC81DB81C4F002363EF /* PopoverViewController.swift in Sources */,
 				8804BC261DB56AF2005114EE /* AppDelegate.swift in Sources */,
 				8804BC541DB57177005114EE /* DrawView.swift in Sources */,
+				8805EACA1DB86707002363EF /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

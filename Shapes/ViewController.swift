@@ -8,19 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var myDrawView: DrawView!
+    @IBOutlet weak var penColorButton: UIButton!
     
     var startPoint : CGPoint!
     var endPoint : CGPoint!
     
     var eraser = false
-    var color = UIColor.black
     var thickness = 3.0
+    
+    var penColor = Color(r: 0, g: 0, b: 0)
+    var canvasColor = Color(r: 0.5, g: 0.5, b: 0.5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myDrawView.backgroundColor = canvasColor.getColor()
+        penColorButton.backgroundColor = penColor.getColor()
+        print("here")
     }
     
     @IBAction func onSwitched(_ sender: UISwitch) {
@@ -45,7 +51,7 @@ class ViewController: UIViewController {
         if eraser {
             myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: myDrawView.backgroundColor!, width: thickness))
         } else {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: color, width: thickness))
+            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness))
         }
         
         startPoint = endPoint
@@ -55,6 +61,27 @@ class ViewController: UIViewController {
     @IBAction func onTappedClear(_ sender: AnyObject) {
         myDrawView.points = [Line]()
         myDrawView.setNeedsDisplay()
+    }
+    
+    //=================================================
+    // segues
+    //=================================================
+    
+    @IBAction func prepareForUnwind(unwindSegue: UIStoryboardSegue) {
+        let mvc = unwindSegue.source as! PopoverViewController
+        penColor = mvc.color
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dvc = segue.destination as! PopoverViewController
+        dvc.modalPresentationStyle = UIModalPresentationStyle.popover
+        dvc.popoverPresentationController!.delegate = self
+        dvc.color = penColor
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle
+    {
+        return .none
     }
     
 }
