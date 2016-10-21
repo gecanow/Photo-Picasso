@@ -14,6 +14,9 @@ class Color: NSObject {
     var green = CGFloat(0.0)
     var blue = CGFloat(0.0)
     
+    //=====================================================
+    // INIT
+    //=====================================================
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
         self.init()
         red = r
@@ -21,6 +24,9 @@ class Color: NSObject {
         blue = b
     }
     
+    //=====================================================
+    // Returns the UIColor of this color
+    //=====================================================
     func getColor() -> UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }

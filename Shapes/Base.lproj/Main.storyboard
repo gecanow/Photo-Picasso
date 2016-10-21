@@ -36,6 +36,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RPD-SL-DyW" customClass="DrawView" customModule="Shapes" customModuleProvider="target">
                                 <frame key="frameInset" minX="16" minY="42" width="343" height="550"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kl8-3r-BmM" userLabel="Width">
                                 <frame key="frameInset" minX="175" minY="607" width="172" height="45"/>
@@ -122,6 +123,23 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLS-m3-XWP">
+                                <frame key="frameInset" minX="16" minY="23" width="85" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Remove Image"/>
+                                <connections>
+                                    <action selector="onTappedRemoveImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xFy-CC-qiR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAn-uf-dxV">
+                                <frame key="frameInset" minX="313" minY="11" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="onTappedSave:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a1m-lt-fww"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -159,20 +177,22 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GGN-c0-uJu" secondAttribute="bottom" constant="8" id="z3N-1i-ggX"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="VJM-TN-Urt" appends="YES" id="FPS-TV-cvv"/>
+                            <outletCollection property="gestureRecognizers" destination="zPR-j7-hhu" appends="YES" id="Mlp-ad-cPb"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="canvasColorButton" destination="R9h-9p-hvG" id="d4o-TU-iQL"/>
                         <outlet property="myDrawView" destination="RPD-SL-DyW" id="Zzf-qG-YZi"/>
+                        <outlet property="myEraser" destination="cAd-H4-IPi" id="s47-Wz-sUC"/>
                         <outlet property="penColorButton" destination="sfi-2m-bk3" id="eBA-9q-BxV"/>
+                        <outlet property="removeImageButton" destination="hLS-m3-XWP" id="BLc-JM-9UA"/>
                         <outlet property="toolBox" destination="GGN-c0-uJu" id="EB7-7F-H6v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="VJM-TN-Urt">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="zPR-j7-hhu">
                     <connections>
-                        <action selector="onDrag:" destination="BYZ-38-t0r" id="yi2-XE-4I6"/>
+                        <action selector="onDrag:" destination="BYZ-38-t0r" id="Anw-4e-mLy"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
@@ -187,7 +207,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Y8w-jv-9bD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NNM-oD-ZXV">
-                        <rect key="frame" x="0.0" y="0.0" width="210" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="210" height="220"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nx6-Q6-r1j" userLabel="Green">
@@ -265,16 +285,25 @@
                                     </slider>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6g-yp-V6K">
+                                <frame key="frameInset" minX="56" minY="182" width="89" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camera Roll"/>
+                                <connections>
+                                    <action selector="didPressCameraRoll:" destination="SPU-Jn-eqb" eventType="touchUpInside" id="qnI-jO-IsZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="210" height="200"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="210" height="220"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="210" height="200"/>
+                    <size key="freeformSize" width="210" height="220"/>
                     <connections>
                         <outlet property="blueLabel" destination="MEw-fR-oDg" id="uD9-K4-Jcb"/>
                         <outlet property="blueSlider" destination="GBp-Sg-v09" id="3up-qb-Q7G"/>
+                        <outlet property="cameraRollButton" destination="D6g-yp-V6K" id="1gh-2r-f8U"/>
                         <outlet property="greenLabel" destination="OGr-KE-Dde" id="lCr-dk-4LK"/>
                         <outlet property="greenSlider" destination="ii2-x1-t0K" id="GBI-sz-9FV"/>
                         <outlet property="redLabel" destination="mKC-NL-dGq" id="FX5-2x-PwD"/>
@@ -283,10 +312,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RFk-M0-uvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="627" y="124"/>
+            <point key="canvasLocation" x="625.60000000000002" y="123.23838080959521"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LbI-XL-jjv"/>
+        <segue reference="6KS-TD-4CO"/>
     </inferredMetricsTieBreakers>
 </document>

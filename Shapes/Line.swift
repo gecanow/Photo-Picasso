@@ -16,6 +16,9 @@ class Line: NSObject {
     var thickness = 3.0
     var isEraser = false
     
+    //=====================================================
+    // INIT
+    //=====================================================
     init(begin: CGPoint, close: CGPoint, color: UIColor, width: Double) {
         start = begin
         end = close
@@ -23,6 +26,9 @@ class Line: NSObject {
         thickness = width
     }
     
+    //=====================================================
+    // INIT #2
+    //=====================================================
     init(begin: CGPoint, close: CGPoint, width: Double, eraser: Bool) {
         start = begin
         end = close

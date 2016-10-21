@@ -1,33 +1,28 @@
 //
-//  DrawView.swift
+//  DrawImageView.swift
 //  Shapes
 //
-//  Created by Gaby Ecanow on 10/17/16.
+//  Created by Gaby Ecanow on 10/20/16.
 //  Copyright © 2016 Gaby Ecanow. All rights reserved.
 //
 
 import UIKit
 
-class DrawView: UIView {
-    
+class DrawImageView: UIImageView {
+
     var points = [Line]()
     
-    //=====================================================
-    // INIT
-    //=====================================================
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    //=====================================================
-    // Overriden function draw
-    //=====================================================
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         
         if points.count > 0 {
             context?.beginPath()
             for line in points {
+                print("Drawing lines!!!!")
                 context?.setLineWidth(CGFloat(line.thickness))
                 
                 if line.isEraser {
