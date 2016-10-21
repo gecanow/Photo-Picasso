@@ -11,13 +11,18 @@ import UIKit
 class ViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var myDrawView: DrawView!
-    var myBackground = UIImageView()
+    @IBOutlet weak var myBackground: UIImageView!
+    
     @IBOutlet weak var removeImageButton: UIButton!
     @IBOutlet weak var myEraser: UISwitch!
     
     @IBOutlet weak var penColorButton: UIButton!
     @IBOutlet weak var canvasColorButton: UIButton!
-    @IBOutlet weak var toolBox: UILabel!
+    @IBOutlet weak var toolBoxView: UIView!
+    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var hideToolboxButton: UIButton!
+    
     
     var startPoint : CGPoint!
     var endPoint : CGPoint!
@@ -48,13 +53,22 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         canvasColorButton.layer.cornerRadius = 5
         canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
         
-        myDrawView.layer.cornerRadius = 7
-        toolBox.layer.cornerRadius = 7
-        myBackground.layer.cornerRadius = 7
+        //myDrawView.layer.cornerRadius = 7
+        //toolBox.layer.cornerRadius = 7
+        toolBoxView.layer.cornerRadius = 7
+        //myBackground.layer.cornerRadius = 7
+        myBackground.backgroundColor = UIColor.clear
+        myBackground.contentMode = .scaleAspectFit
+    }
+    
+    
+    @IBAction func onPressedToolboxButton(_ sender: UIButton) {
         
-        myBackground.frame = myDrawView.frame
-        self.view.addSubview(myBackground)
-        self.view.sendSubview(toBack: myBackground)
+        if sender.currentTitle == "Hide Toolbox" {
+            
+        } else {
+            sender.setTitle("Hide Toolbox", for: .normal)
+        }
     }
     
     //=====================================================
@@ -137,24 +151,57 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onTappedSave(_ sender: AnyObject) {
         UIImageWriteToSavedPhotosAlbum(fullImage(), nil, nil, nil)
+        
+        let actionSheet = UIAlertController(title: "Your Photo Has Been Saved!", message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        actionSheet.addAction(okAction)
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     //=====================================================
     // Returns a uiimage of the drawing
     //=====================================================
     func fullImage() -> UIImage {
-        myBackground.addSubview(myDrawView)
         
-        let size = myDrawView.frame.size
+        // check is remove button is hidden
+        var hasImage = true
+        if removeImageButton.isHidden {
+            hasImage = false
+        }
+        
+        // first make everything hidden
+        removeImageButton.isHidden = true
+        clearButton.isHidden = true
+        saveButton.isHidden = true
+        toolBoxView.isHidden = true
+        
+        // then take the snapshot
+        let size = myBackground.frame.size
         UIGraphicsBeginImageContext(size)
         self.view!.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        myBackground.transform = CGAffineTransform.identity
+        myDrawView.transform = CGAffineTransform.identity
+        
+        // the unhide everything
+        if hasImage {
+            removeImageButton.isHidden = false
+        }
+        clearButton.isHidden = false
+        saveButton.isHidden = false
+        toolBoxView.isHidden = false
+        
         return image!
     }
     
     //=================================================
     // segues
+    //=================================================
+    
+    //=================================================
+    // Prepare for segue to popover
     //=================================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dvc = segue.destination as! PopoverViewController
@@ -172,11 +219,17 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         dvc.backgroundImage = myBackground
     }
     
+    //=================================================
+    // For popover
+    //=================================================
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle
     {
         return .none
     }
     
+    //=================================================
+    // Is called when the popover is dismissed
+    //=================================================
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         
         let ppc = popoverPresentationController.presentedViewController as! PopoverViewController
