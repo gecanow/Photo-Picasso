@@ -18,9 +18,10 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     
     @IBOutlet weak var penColorButton: UIButton!
     @IBOutlet weak var canvasColorButton: UIButton!
+    
+    
+    @IBOutlet weak var toolBox: UIView!
     @IBOutlet weak var toolBoxView: UIView!
-    @IBOutlet weak var clearButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var hideToolboxButton: UIButton!
     
     
@@ -40,36 +41,19 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        popoverPresentationController?.delegate = self
-        
-        myDrawView.backgroundColor = canvasColor.getColor()
-        
-        penColorButton.layer.borderWidth = 2
-        penColorButton.layer.cornerRadius = 5
-        penColorButton.layer.backgroundColor = penColor.getColor().cgColor
-        
-        canvasColorButton.layer.borderWidth = 2
-        canvasColorButton.layer.cornerRadius = 5
-        canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
-        
-        //myDrawView.layer.cornerRadius = 7
-        //toolBox.layer.cornerRadius = 7
-        toolBoxView.layer.cornerRadius = 7
-        //myBackground.layer.cornerRadius = 7
-        myBackground.backgroundColor = UIColor.clear
-        myBackground.contentMode = .scaleAspectFit
+        setUpBasicUI()
     }
     
-    
     @IBAction func onPressedToolboxButton(_ sender: UIButton) {
-        
         if sender.currentTitle == "Hide Toolbox" {
-            
+            toolBox.isHidden = true
+            sender.setTitle("Show Toolbox", for: .normal)
         } else {
+            toolBox.isHidden = false
             sender.setTitle("Hide Toolbox", for: .normal)
         }
     }
+    
     
     //=====================================================
     // Turns the eraser on/off
@@ -118,8 +102,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles when the clear button is tapped
     //=====================================================
     @IBAction func onTappedClear(_ sender: AnyObject) {
-        myDrawView.points = [Line]()
-        myDrawView.setNeedsDisplay()
+        let actionSheet = UIAlertController(title: "Are you sure you would like to clear your drawing?", message: "If yes, click Clear.", preferredStyle: .alert)
+        let clearAction = UIAlertAction(title: "Clear", style: .default) { (Void) in
+            self.myDrawView.points = [Line]()
+            self.myDrawView.setNeedsDisplay()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(clearAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     //=====================================================
@@ -143,7 +135,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         myBackground.image = nil
         myDrawView.backgroundColor = canvasColor.getColor()
         sender.isHidden = true
-        myEraser.isEnabled = true
+        myEraser.isEnabled = true //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     //=====================================================
@@ -171,9 +163,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         
         // first make everything hidden
         removeImageButton.isHidden = true
-        clearButton.isHidden = true
-        saveButton.isHidden = true
-        toolBoxView.isHidden = true
+        toolBox.isHidden = true
+        hideToolboxButton.isHidden = true
         
         // then take the snapshot
         let size = myBackground.frame.size
@@ -185,15 +176,45 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         myBackground.transform = CGAffineTransform.identity
         myDrawView.transform = CGAffineTransform.identity
         
-        // the unhide everything
+        // then unhide everything
         if hasImage {
             removeImageButton.isHidden = false
         }
-        clearButton.isHidden = false
-        saveButton.isHidden = false
-        toolBoxView.isHidden = false
+        toolBox.isHidden = false
+        hideToolboxButton.isHidden = false
         
         return image!
+    }
+    
+    func setUpBasicUI() {
+        popoverPresentationController?.delegate = self
+        
+        myDrawView.backgroundColor = canvasColor.getColor()
+        
+        penColorButton.layer.borderWidth = 2
+        penColorButton.layer.cornerRadius = 5
+        penColorButton.layer.backgroundColor = penColor.getColor().cgColor
+        
+        canvasColorButton.layer.borderWidth = 2
+        canvasColorButton.layer.cornerRadius = 5
+        canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
+        
+        toolBoxView.layer.cornerRadius = 7
+        toolBox.layer.cornerRadius = 7
+        
+        myBackground.backgroundColor = UIColor.black
+        myBackground.contentMode = .scaleAspectFit
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 174, y: 3))
+        path.addLine(to: CGPoint(x: 174, y: 20))
+        UIColor.black.setStroke()
+        path.stroke()
+        
+        let layer = CAShapeLayer()
+        layer.path = path.cgPath
+        layer.strokeColor = UIColor.black.cgColor
+        toolBox.layer.addSublayer(layer)
     }
     
     //=================================================
@@ -246,6 +267,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
                 myBackground.image = ppc.backgroundImage.image
                 myDrawView.backgroundColor = UIColor.clear
                 removeImageButton.isHidden = false
+                
+                eraser = false
+                myEraser.isOn = false
                 myEraser.isEnabled = false
             }
         }
