@@ -19,11 +19,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     @IBOutlet weak var penColorButton: UIButton!
     @IBOutlet weak var canvasColorButton: UIButton!
     
-    
     @IBOutlet weak var toolBox: UIView!
-    @IBOutlet weak var toolBoxView: UIView!
     @IBOutlet weak var hideToolboxButton: UIButton!
-    
     
     var startPoint : CGPoint!
     var endPoint : CGPoint!
@@ -35,6 +32,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var canvasColor = Color(r: 0.8, g: 0.8, b: 0.8)
     
     var isPenColor = true
+    var didTapQuestion = false
     
     //=====================================================
     // VIEW DID LOAD FUNCTION
@@ -202,6 +200,10 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         return image!
     }
     
+    @IBAction func onTappedQuestion(_ sender: AnyObject) {
+        didTapQuestion = true
+    }
+    
     //=====================================================
     // Handles setting up the basic ui, called in 
     // viewDidLoad()
@@ -212,14 +214,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         
         // set up ui stuff
         myDrawView.backgroundColor = canvasColor.getColor()
-        penColorButton.layer.borderWidth = 2
-        penColorButton.layer.cornerRadius = 5
         penColorButton.layer.backgroundColor = penColor.getColor().cgColor
-        canvasColorButton.layer.borderWidth = 2
-        canvasColorButton.layer.cornerRadius = 5
         canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
-        toolBoxView.layer.cornerRadius = 7
-        toolBox.layer.cornerRadius = 7
         myBackground.backgroundColor = UIColor.black
         myBackground.contentMode = .scaleAspectFit
         
@@ -244,19 +240,21 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Prepare for segue to popover
     //=================================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dvc = segue.destination as! PopoverViewController
-        dvc.modalPresentationStyle = UIModalPresentationStyle.popover
-        dvc.popoverPresentationController!.delegate = self
+        if !didTapQuestion {
+            let dvc = segue.destination as! PopoverViewController
+            dvc.modalPresentationStyle = UIModalPresentationStyle.popover
+            dvc.popoverPresentationController!.delegate = self
+            
+            if isPenColor {
+                dvc.color = penColor
+                dvc.calledByPen = true
+            } else {
+                dvc.color = canvasColor
+                dvc.calledByPen = false
+            }
         
-        if isPenColor {
-            dvc.color = penColor
-            dvc.calledByPen = true
-        } else {
-            dvc.color = canvasColor
-            dvc.calledByPen = false
+            dvc.backgroundImage = myBackground
         }
-        
-        dvc.backgroundImage = myBackground
     }
     
     //=================================================
