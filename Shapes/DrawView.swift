@@ -42,5 +42,20 @@ class DrawView: UIView {
             }
         }
     }
+    
+    //=====================================================
+    // Undoes the last move by finding the last start 
+    // point and then removing everything after it
+    //=====================================================
+    func undoLastMove() {
+        var latestStart = 0
+        for index in 0..<points.count {
+            if points[index].startsATurn {
+                latestStart = index
+            }
+        }
+        points = Array(points.prefix(latestStart))
+        self.setNeedsDisplay()
+    }
 
 }

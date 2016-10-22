@@ -15,24 +15,27 @@ class Line: NSObject {
     var color = UIColor.black
     var thickness = 3.0
     var isEraser = false
+    var startsATurn = false
     
     //=====================================================
     // INIT
     //=====================================================
-    init(begin: CGPoint, close: CGPoint, color: UIColor, width: Double) {
+    init(begin: CGPoint, close: CGPoint, color: UIColor, width: Double, starting: Bool) {
         start = begin
         end = close
         self.color = color
         thickness = width
+        startsATurn = starting
     }
     
     //=====================================================
     // INIT #2
     //=====================================================
-    init(begin: CGPoint, close: CGPoint, width: Double, eraser: Bool) {
+    init(begin: CGPoint, close: CGPoint, width: Double, eraser: Bool, starting: Bool) {
         start = begin
         end = close
         thickness = width
         isEraser = eraser
+        startsATurn = starting
     }
 }

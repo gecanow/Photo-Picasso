@@ -91,10 +91,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     @IBAction func onDrag(_ sender: UIPanGestureRecognizer) {
         endPoint = sender.location(in: myDrawView)
         
+        var isBeginning = false
+        if sender.state == .began {
+            isBeginning = true
+        }
+        
+        
         if eraser {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true))
+            myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
         } else {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness))
+            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, starting: isBeginning))
         }
         
         startPoint = endPoint
@@ -115,6 +121,13 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         actionSheet.addAction(clearAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    //=====================================================
+    // Handles when the undo button is pressed
+    //=====================================================
+    @IBAction func onTappedUndo(_ sender: AnyObject) {
+        myDrawView.undoLastMove()
     }
     
     //=====================================================

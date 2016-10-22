@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,14 +45,15 @@
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3AF-oT-wVU" userLabel="Eraser">
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Eraser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO7-FO-JXh">
-                                                        <frame key="frameInset" width="50" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eraser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO7-FO-JXh">
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="BYy-oI-Z8R"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-H4-IPi">
-                                                        <frame key="frameInset" minY="15" width="52" height="31"/>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-H4-IPi">
                                                         <connections>
                                                             <action selector="onSwitched:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mnp-LG-z3a"/>
                                                         </connections>
@@ -65,14 +67,15 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ui5-mY-7bA" userLabel="Pen Color">
                                                 <frame key="frameInset" minX="70" minY="7" width="33" height="45"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Pen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTM-4P-UZf">
-                                                        <frame key="frameInset" width="33" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTM-4P-UZf">
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="E1L-gP-HgP"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfi-2m-bk3">
-                                                        <frame key="frameInset" minY="15" width="33" height="31"/>
+                                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfi-2m-bk3">
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <action selector="onTappedPenColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CQh-mY-WnR"/>
@@ -86,14 +89,15 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YfW-EP-824" userLabel="Background Color">
                                                 <frame key="frameInset" minX="110" minY="7" width="42" height="45"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Canvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQE-eL-hh9">
-                                                        <frame key="frameInset" width="42" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Canvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQE-eL-hh9">
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="YD0-08-ku3"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9h-9p-hvG">
-                                                        <frame key="frameInset" minY="15" width="42" height="31"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9h-9p-hvG">
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <action selector="onTappedCanvasColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ccl-tE-Zzk"/>
@@ -106,14 +110,15 @@
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kl8-3r-BmM" userLabel="Width">
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37o-FC-mzY">
-                                                        <frame key="frameInset" minX="70" width="34" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37o-FC-mzY">
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="1cs-Q4-fRr"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aAl-iM-weC">
-                                                        <frame key="frameInset" minX="-1" minY="15" width="175" height="32"/>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aAl-iM-weC">
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="171" id="y0R-e0-bwJ"/>
                                                         </constraints>
@@ -146,6 +151,13 @@
                                             <constraint firstItem="Ui5-mY-7bA" firstAttribute="leading" secondItem="3AF-oT-wVU" secondAttribute="trailing" constant="10" id="uFZ-KA-tQR"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Po2-Xi-Wkb">
+                                        <frame key="frameInset" minX="14" minY="-2" width="50" height="27"/>
+                                        <state key="normal" title="Undo"/>
+                                        <connections>
+                                            <action selector="onTappedUndo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nul-dX-LVl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -157,9 +169,11 @@
                                     <constraint firstItem="cPr-El-Yrp" firstAttribute="leading" secondItem="PDn-xg-88H" secondAttribute="leading" constant="125" id="VhN-6L-5nM"/>
                                     <constraint firstAttribute="bottom" secondItem="MAn-uf-dxV" secondAttribute="bottom" constant="61" id="fRU-Es-6NK"/>
                                     <constraint firstItem="cPr-El-Yrp" firstAttribute="top" secondItem="PDn-xg-88H" secondAttribute="top" constant="-2" id="jPf-OR-fGi"/>
+                                    <constraint firstItem="Po2-Xi-Wkb" firstAttribute="top" secondItem="PDn-xg-88H" secondAttribute="top" constant="-2" id="lwV-aq-fmQ"/>
                                     <constraint firstItem="MAn-uf-dxV" firstAttribute="top" secondItem="PDn-xg-88H" secondAttribute="top" constant="-2" id="oKh-H8-iRh"/>
                                     <constraint firstItem="MAn-uf-dxV" firstAttribute="leading" secondItem="cPr-El-Yrp" secondAttribute="trailing" constant="10" id="p7Y-km-p6d"/>
                                     <constraint firstItem="MAn-uf-dxV" firstAttribute="top" secondItem="PDn-xg-88H" secondAttribute="top" constant="-2" id="q9K-LY-aiY"/>
+                                    <constraint firstItem="Po2-Xi-Wkb" firstAttribute="leading" secondItem="PDn-xg-88H" secondAttribute="leading" constant="14" id="sTx-2X-Tg3"/>
                                     <constraint firstAttribute="bottom" secondItem="0wR-JM-kVI" secondAttribute="bottom" constant="4" id="tRx-Bj-pd5"/>
                                     <constraint firstItem="0wR-JM-kVI" firstAttribute="leading" secondItem="PDn-xg-88H" secondAttribute="leading" constant="8" id="yvF-Tc-ozg"/>
                                 </constraints>
@@ -299,8 +313,7 @@
                                     </slider>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6g-yp-V6K">
-                                <frame key="frameInset" minX="56" minY="182" width="89" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6g-yp-V6K">
                                 <state key="normal" title="Camera Roll"/>
                                 <connections>
                                     <action selector="didPressCameraRoll:" destination="SPU-Jn-eqb" eventType="touchUpInside" id="qnI-jO-IsZ"/>
@@ -313,14 +326,17 @@
                             <constraint firstItem="nx6-Q6-r1j" firstAttribute="top" secondItem="56M-IS-4BN" secondAttribute="bottom" constant="26" id="4TE-lc-t8z"/>
                             <constraint firstItem="Yg2-D6-eIe" firstAttribute="top" secondItem="nx6-Q6-r1j" secondAttribute="bottom" constant="21" id="4xB-YR-T1I"/>
                             <constraint firstItem="Yg2-D6-eIe" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leading" constant="7" id="AV5-Iz-0Wr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D6g-yp-V6K" secondAttribute="trailing" constant="44" id="KQ0-OE-QYJ"/>
+                            <constraint firstItem="D6g-yp-V6K" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leadingMargin" constant="44" id="Ldy-o4-Jzu"/>
                             <constraint firstAttribute="trailing" secondItem="nx6-Q6-r1j" secondAttribute="trailing" constant="17" id="RL3-tU-T7Z"/>
                             <constraint firstItem="56M-IS-4BN" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leading" constant="7" id="XKV-s9-leD"/>
+                            <constraint firstItem="D6g-yp-V6K" firstAttribute="top" secondItem="Yg2-D6-eIe" secondAttribute="bottom" constant="16" id="Y2R-0H-LK8"/>
                             <constraint firstAttribute="trailing" secondItem="Yg2-D6-eIe" secondAttribute="trailing" constant="16" id="d0p-Ff-cgs"/>
-                            <constraint firstItem="D6g-yp-V6K" firstAttribute="top" secondItem="Yg2-D6-eIe" secondAttribute="bottom" constant="16" id="d7G-Jg-98G"/>
                             <constraint firstItem="Yg2-D6-eIe" firstAttribute="top" secondItem="nx6-Q6-r1j" secondAttribute="bottom" constant="21" id="dys-lh-dZn"/>
                             <constraint firstAttribute="trailing" secondItem="56M-IS-4BN" secondAttribute="trailing" constant="16" id="ief-LP-pqV"/>
                             <constraint firstItem="nx6-Q6-r1j" firstAttribute="top" secondItem="56M-IS-4BN" secondAttribute="bottom" constant="26" id="lBL-Zn-pxI"/>
                             <constraint firstItem="56M-IS-4BN" firstAttribute="top" secondItem="nTu-kj-aII" secondAttribute="bottom" constant="29" id="mh8-lz-zdT"/>
+                            <constraint firstItem="Y8w-jv-9bD" firstAttribute="top" secondItem="D6g-yp-V6K" secondAttribute="bottom" constant="8" id="xls-Ap-nwu"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="210" height="220"/>
