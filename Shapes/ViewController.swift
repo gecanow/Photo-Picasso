@@ -44,6 +44,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         setUpBasicUI()
     }
     
+    //=====================================================
+    // Handles when the toolbox button is tapped
+    //=====================================================
     @IBAction func onPressedToolboxButton(_ sender: UIButton) {
         if sender.currentTitle == "Hide Toolbox" {
             toolBox.isHidden = true
@@ -135,7 +138,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         myBackground.image = nil
         myDrawView.backgroundColor = canvasColor.getColor()
         sender.isHidden = true
-        myEraser.isEnabled = true //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        myEraser.isEnabled = true
     }
     
     //=====================================================
@@ -186,28 +189,31 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         return image!
     }
     
+    //=====================================================
+    // Handles setting up the basic ui, called in 
+    // viewDidLoad()
+    //=====================================================
     func setUpBasicUI() {
+        // give the popover a delegate
         popoverPresentationController?.delegate = self
         
+        // set up ui stuff
         myDrawView.backgroundColor = canvasColor.getColor()
-        
         penColorButton.layer.borderWidth = 2
         penColorButton.layer.cornerRadius = 5
         penColorButton.layer.backgroundColor = penColor.getColor().cgColor
-        
         canvasColorButton.layer.borderWidth = 2
         canvasColorButton.layer.cornerRadius = 5
         canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
-        
         toolBoxView.layer.cornerRadius = 7
         toolBox.layer.cornerRadius = 7
-        
         myBackground.backgroundColor = UIColor.black
         myBackground.contentMode = .scaleAspectFit
         
+        // draw a line on the toolbox separating "clear" and "save"
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: 174, y: 3))
-        path.addLine(to: CGPoint(x: 174, y: 20))
+        path.move(to: CGPoint(x: 181, y: 3))
+        path.addLine(to: CGPoint(x: 181, y: 20))
         UIColor.black.setStroke()
         path.stroke()
         
