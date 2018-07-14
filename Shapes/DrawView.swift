@@ -25,9 +25,11 @@ class DrawView: UIView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         
+        var cgpointArr = [CGPoint]()
         if points.count > 0 {
             context?.beginPath()
             for line in points {
+                
                 context?.setLineWidth(CGFloat(line.thickness))
                 
                 if line.isEraser {
@@ -36,11 +38,45 @@ class DrawView: UIView {
                     context?.setStrokeColor(line.color.cgColor)
                 }
                 
-                context?.move(to: line.start)
-                context?.addLine(to: line.end)
+                if line.startsATurn { cgpointArr = [CGPoint]() }
+                
+                cgpointArr.append(line.start)
+                cgpointArr.append(line.end)
+                
+                
+                
+                context?.addLines(between: cgpointArr)
                 context?.strokePath()
             }
         }
+    }
+    
+    func imageByDrawingCircle(on image: UIImage) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: image.size.width, height: image.size.height), false, 0.0)
+        
+        // draw original image into the context
+        image.draw(at: CGPoint.zero)
+        
+        // get the context for CoreGraphics
+        let ctx = UIGraphicsGetCurrentContext()!
+        
+        // set stroking color and draw circle
+        ctx.setStrokeColor(UIColor.red.cgColor)
+        
+        // make circle rect 5 px from border
+        var circleRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        circleRect = circleRect.insetBy(dx: 5, dy: 5)
+        
+        // draw circle
+        ctx.strokeEllipse(in: circleRect)
+        
+        // make image out of bitmap context
+        let retImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        // free the context
+        UIGraphicsEndImageContext()
+        
+        return retImage;
     }
     
     //=====================================================
