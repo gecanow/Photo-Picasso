@@ -34,6 +34,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var isPenColor = true
     var didTapQuestion = false
     
+    var dragPoint1 : CGPoint?
+    
     //=====================================================
     // VIEW DID LOAD FUNCTION
     //=====================================================
@@ -47,25 +49,38 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onPressedToolboxButton(_ sender: UIButton) {
         if sender.currentTitle == "Hide Toolbox" {
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.toolBox.transform = CGAffineTransform(translationX: 0, y: 70)
-            }) { (void) in
-                self.toolBox.isHidden = true
-                sender.setTitle("Show Toolbox", for: .normal)
-            }
-            
+            transformToolbox(toX: -self.toolBox.frame.width, newTitle: "Show Toolbox")
         } else {
-            self.toolBox.isHidden = false
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.toolBox.transform = CGAffineTransform(translationX: 0, y: 0)
-            }) { (void) in
-                sender.setTitle("Hide Toolbox", for: .normal)
-            }
+            transformToolbox(toX: 0, newTitle: "Hide Toolbox")
         }
     }
     
+    @IBAction func onTappedToolbox(_ sender: UITapGestureRecognizer) {
+        if hideToolboxButton.titleLabel?.text == "Show Toolbox" {
+            transformToolbox(toX: 0, newTitle: "Hide Toolbox")
+        }
+    }
+    
+    @IBAction func onDraggedToolBox(_ sender: UIPanGestureRecognizer) {
+        if dragPoint1 == nil {
+            dragPoint1 = sender.location(in: toolBox)
+        } else {
+            let point2 = sender.location(in: toolBox)
+            
+            if dragPoint1!.x > point2.x {
+                transformToolbox(toX: -self.toolBox.frame.width, newTitle: "Show Toolbox")
+            }
+            dragPoint1 = nil
+        }
+    }
+    
+    func transformToolbox(toX: CGFloat, newTitle: String) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.toolBox.transform = CGAffineTransform(translationX: toX, y: 0)
+        }) { (void) in
+            self.hideToolboxButton.setTitle(newTitle, for: .normal)
+        }
+    }
     
     //=====================================================
     // Turns the eraser on/off
@@ -120,8 +135,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles when the clear button is tapped
     //=====================================================
     @IBAction func onTappedClear(_ sender: AnyObject) {
-        let actionSheet = UIAlertController(title: "Are you sure you would like to clear your drawing?", message: "If yes, click Clear.", preferredStyle: .alert)
-        let clearAction = UIAlertAction(title: "Clear", style: .default) { (Void) in
+        let actionSheet = UIAlertController(title: "Are you sure you would like to clear your drawing?", message: "", preferredStyle: .alert)
+        let clearAction = UIAlertAction(title: "Clear Drawing", style: .default) { (Void) in
             self.myDrawView.points = [Line]()
             self.myDrawView.setNeedsDisplay()
         }
@@ -229,18 +244,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
         myBackground.backgroundColor = UIColor.black
         myBackground.contentMode = .scaleAspectFit
-        
-        // draw a line on the toolbox separating "clear" and "save"
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 181, y: 3))
-        path.addLine(to: CGPoint(x: 181, y: 20))
-        UIColor.black.setStroke()
-        path.stroke()
-        
-        let layer = CAShapeLayer()
-        layer.path = path.cgPath
-        layer.strokeColor = UIColor.black.cgColor
-        toolBox.layer.addSublayer(layer)
     }
     
     //=================================================
