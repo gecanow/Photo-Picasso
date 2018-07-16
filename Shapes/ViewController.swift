@@ -27,13 +27,14 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var eraser = false
     var thickness = 3.0
     
-    var penColor = Color(h: 0.0, s: 1.0, b: 1.0)//(r: 0, g: 0, b: 0)
-    var canvasColor = Color(h: 0.5, s: 0.0, b: 1.0) //(r: 1, g: 1, b: 1)
+    var penColor = Color(h: 0.0, s: 1.0, b: 1.0)
+    var canvasColor = Color(h: 0.5, s: 0.0, b: 1.0)
     
     var isPenColor = true
     var didTapQuestion = false
     
     var dragPoint1 : CGPoint?
+    var isBeginning = false
     
     //=====================================================
     // VIEW DID LOAD FUNCTION
@@ -92,7 +93,21 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles when the touches begin
     //=====================================================
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        // first, merge the last drawing bc now you know they aren't undoing it
+        if myDrawView.image != nil {
+            UIGraphicsBeginImageContext(myDrawView.frame.size)
+            myBackground.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)
+            myDrawView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)//opacity)
+        
+            myBackground.image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+        
+            myDrawView.image = nil
+        }
+        
         startPoint = touches.first?.location(in: myDrawView)
+        isBeginning = true
     }
     
     //=====================================================
@@ -100,23 +115,23 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // across the screen, and appends the line to the 
     // draw view array
     //=====================================================
-    @IBAction func onDrag(_ sender: UIPanGestureRecognizer) {
-        endPoint = sender.location(in: myDrawView)
-        
-        var isBeginning = false
-        if sender.state == .began {
-            isBeginning = true
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let endPoint = touch.location(in: myDrawView)
+            
+            if eraser {
+                myDrawView.drawLineFrom(line: Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
+            } else {
+                myDrawView.drawLineFrom(line: Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, starting: isBeginning))
+            }
+            isBeginning = false
+            startPoint = endPoint
         }
-        
-        
-        if eraser {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
-        } else {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getMyColor(), width: thickness, starting: isBeginning))
-        }
-        
-        startPoint = endPoint
-        myDrawView.setNeedsDisplay()
+    }
+    
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // did merge, now in touchesBegan
     }
     
     //=====================================================
@@ -126,7 +141,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         let actionSheet = UIAlertController(title: "Are you sure you would like to clear your drawing?", message: "", preferredStyle: .alert)
         let clearAction = UIAlertAction(title: "Clear Drawing", style: .default) { (Void) in
             self.myDrawView.points = [Line]()
-            self.myDrawView.setNeedsDisplay()
+            self.myBackground.image = nil
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -139,7 +154,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles when the undo button is pressed
     //=====================================================
     @IBAction func onTappedUndo(_ sender: AnyObject) {
-        myDrawView.undoLastMove()
+        myDrawView.image = nil
     }
     
     //=====================================================
@@ -161,7 +176,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onTappedRemoveImage(_ sender: UIButton) {
         myBackground.image = nil
-        myDrawView.backgroundColor = canvasColor.getMyColor()
+        myDrawView.backgroundColor = canvasColor.getColor()
         sender.isHidden = true
         //myEraser.isEnabled = true
     }
@@ -170,12 +185,23 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles saving the image to the user's library
     //=====================================================
     @IBAction func onTappedSave(_ sender: AnyObject) {
-        UIImageWriteToSavedPhotosAlbum(fullImage(), nil, nil, nil)
+        //UIImageWriteToSavedPhotosAlbum(fullImage(), nil, nil, nil)
         
-        let actionSheet = UIAlertController(title: "Your Photo Has Been Saved!", message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        actionSheet.addAction(okAction)
-        self.present(actionSheet, animated: true, completion: nil)
+        //let actionSheet = UIAlertController(title: "Your Photo Has Been Saved!", message: nil, preferredStyle: .alert)
+        //let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        //actionSheet.addAction(okAction)
+        //self.present(actionSheet, animated: true, completion: nil)
+        
+        UIGraphicsBeginImageContext(myBackground.bounds.size)
+        myBackground.image?.draw(in: CGRect(x: 0,
+                                            y: 0,
+                                            width: myBackground.frame.size.width,
+                                            height: myBackground.frame.size.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let activity = UIActivityViewController(activityItems: [image as Any], applicationActivities: nil)
+        present(activity, animated: true, completion: nil)
     }
     
     //=====================================================
@@ -227,10 +253,10 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         popoverPresentationController?.delegate = self
         
         // set up ui stuff
-        myDrawView.backgroundColor = canvasColor.getMyColor()
-        penColorButton.layer.backgroundColor = penColor.getMyColor().cgColor
-        canvasColorButton.layer.backgroundColor = canvasColor.getMyColor().cgColor
-        myBackground.backgroundColor = UIColor.black
+        myBackground.backgroundColor = canvasColor.getColor()
+        penColorButton.layer.backgroundColor = penColor.getColor().cgColor
+        canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
+        //myBackground.backgroundColor = UIColor.black
         myBackground.contentMode = .scaleAspectFit
     }
     
@@ -285,16 +311,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             eraser = ppc.eraserSwitch.isOn
             
             if !eraser {
-                penColorButton.setImage(UIImage(named: "crayon outline"), for: .normal)
-                penColorButton.layer.backgroundColor = penColor.getMyColor().cgColor
+                penColorButton.setImage(UIImage(named: "pencil"), for: .normal) //crayon outline
+                penColorButton.layer.backgroundColor = penColor.getColor().cgColor
             } else {
                 penColorButton.setImage(UIImage(named: "eraser"), for: .normal)
                 penColorButton.layer.backgroundColor = UIColor.white.cgColor
             }
         } else {
             canvasColor = ppc.color
-            canvasColorButton.layer.backgroundColor = canvasColor.getMyColor().cgColor
-            myDrawView.backgroundColor = canvasColor.getMyColor()
+            canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
+            myDrawView.backgroundColor = canvasColor.getColor()
             
             if ppc.backgroundImage.image != nil {
                 myBackground.image = ppc.backgroundImage.image

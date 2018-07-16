@@ -17,6 +17,8 @@ class Line: NSObject {
     var isEraser = false
     var startsATurn = false
     
+    var drawn = false
+    
     //=====================================================
     // INIT
     //=====================================================

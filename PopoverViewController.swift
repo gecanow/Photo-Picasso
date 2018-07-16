@@ -10,7 +10,7 @@ import UIKit
 
 class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var color = Color(r: 0, g: 0, b: 0)
+    var color = Color(h: 0, s: 0, b: 0)
     
     @IBOutlet weak var hueSlider: UISlider!
     
@@ -49,6 +49,8 @@ class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, 
             if eraserEnabled {
                 eraserStack.isHidden = false
                 eraserSwitch.isOn = eraserOn
+            } else {
+                eraserStack.isHidden = true
             }
         } else {
             cameraRollButton.isHidden = false
@@ -75,13 +77,13 @@ class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func updateBackgrounds() {
-        brightnessBackground.endColor = color.getMyColor()
+        brightnessBackground.endColor = color.getColor()
         brightnessBackground.setNeedsDisplay()
         
-        saturationBackground.endColor = color.getMyColor()
+        saturationBackground.endColor = color.getColor()
         saturationBackground.setNeedsDisplay()
         
-        self.view.backgroundColor = color.getMyColor()
+        self.view.backgroundColor = color.getColor()
     }
     
     //=====================================================

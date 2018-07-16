@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawView: UIView {
+class DrawView: UIImageView {
     
     var points = [Line]()
     
@@ -39,7 +39,7 @@ class DrawView: UIView {
                 }
                 
                 if line.startsATurn { cgpointArr = [CGPoint]() }
-                
+                    
                 cgpointArr.append(line.start)
                 cgpointArr.append(line.end)
                 
@@ -47,36 +47,41 @@ class DrawView: UIView {
                 
                 context?.addLines(between: cgpointArr)
                 context?.strokePath()
+                line.drawn = true
             }
         }
     }
     
-    func imageByDrawingCircle(on image: UIImage) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: image.size.width, height: image.size.height), false, 0.0)
+    func drawLineFrom(line: Line) {//fromPoint: CGPoint, toPoint: CGPoint) {
         
-        // draw original image into the context
-        image.draw(at: CGPoint.zero)
+        // 1
+        UIGraphicsBeginImageContext(frame.size)
+        let context = UIGraphicsGetCurrentContext()
+        self.image?.draw(in: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
         
-        // get the context for CoreGraphics
-        let ctx = UIGraphicsGetCurrentContext()!
+        // 2
+        context?.move(to: line.start)
+        context?.addLine(to: line.end)
         
-        // set stroking color and draw circle
-        ctx.setStrokeColor(UIColor.red.cgColor)
+        // 3
+        context?.setLineCap(.round)
+        context?.setLineWidth(CGFloat(line.thickness))
         
-        // make circle rect 5 px from border
-        var circleRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        circleRect = circleRect.insetBy(dx: 5, dy: 5)
+        if line.isEraser {
+            context?.setStrokeColor((self.backgroundColor?.cgColor)!)
+        } else {
+            context?.setStrokeColor(line.color.cgColor)
+        }
         
-        // draw circle
-        ctx.strokeEllipse(in: circleRect)
+        context?.setBlendMode(.normal)
         
-        // make image out of bitmap context
-        let retImage = UIGraphicsGetImageFromCurrentImageContext()!
+        // 4
+        context?.strokePath()
         
-        // free the context
+        // 5
+        self.image = UIGraphicsGetImageFromCurrentImageContext()
+        self.alpha = 1.0//opacity
         UIGraphicsEndImageContext()
-        
-        return retImage;
     }
     
     //=====================================================
