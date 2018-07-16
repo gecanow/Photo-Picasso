@@ -18,6 +18,7 @@
 		8805EAC81DB81C4F002363EF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805EAC71DB81C4F002363EF /* PopoverViewController.swift */; };
 		8805EACA1DB86707002363EF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805EAC91DB86707002363EF /* Color.swift */; };
 		88B2A3501DB6C5BB00B2586C /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B2A34F1DB6C5BB00B2586C /* Line.swift */; };
+		CCE8B41F20FCDD300088DDF0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE8B41E20FCDD300088DDF0 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		8805EAC71DB81C4F002363EF /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = ../PopoverViewController.swift; sourceTree = "<group>"; };
 		8805EAC91DB86707002363EF /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		88B2A34F1DB6C5BB00B2586C /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		CCE8B41E20FCDD300088DDF0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				8804BC531DB57177005114EE /* DrawView.swift */,
 				88B2A34F1DB6C5BB00B2586C /* Line.swift */,
 				8804BC291DB56AF2005114EE /* Main.storyboard */,
+				CCE8B41E20FCDD300088DDF0 /* GradientView.swift */,
 				8804BC2C1DB56AF2005114EE /* Assets.xcassets */,
 				8804BC2E1DB56AF2005114EE /* LaunchScreen.storyboard */,
 				8804BC311DB56AF2005114EE /* Info.plist */,
@@ -281,6 +284,7 @@
 				88B2A3501DB6C5BB00B2586C /* Line.swift in Sources */,
 				8805EAC81DB81C4F002363EF /* PopoverViewController.swift in Sources */,
 				8804BC261DB56AF2005114EE /* AppDelegate.swift in Sources */,
+				CCE8B41F20FCDD300088DDF0 /* GradientView.swift in Sources */,
 				8804BC541DB57177005114EE /* DrawView.swift in Sources */,
 				8805EACA1DB86707002363EF /* Color.swift in Sources */,
 			);

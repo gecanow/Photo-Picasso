@@ -12,15 +12,19 @@ class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var color = Color(r: 0, g: 0, b: 0)
     
-    @IBOutlet weak var redSlider: UISlider!
-    @IBOutlet weak var greenSlider: UISlider!
-    @IBOutlet weak var blueSlider: UISlider!
+    @IBOutlet weak var hueSlider: UISlider!
     
-    @IBOutlet weak var redBackground: UIView!
-    @IBOutlet weak var greenBackground: UIView!
-    @IBOutlet weak var blueBackground: UIView!
+    @IBOutlet weak var saturationSlider: UISlider!
+    @IBOutlet weak var saturationBackground: GradientView!
+    
+    @IBOutlet weak var brightnessSlider: UISlider!
+    @IBOutlet weak var brightnessBackground: GradientView!
     
     @IBOutlet weak var cameraRollButton: UIButton!
+    @IBOutlet weak var eraserStack: UIStackView!
+    @IBOutlet weak var eraserSwitch: UISwitch!
+    var eraserOn = false
+    var eraserEnabled = true
     
     var imagePicker = UIImagePickerController()
     var backgroundImage = UIImageView()
@@ -34,64 +38,50 @@ class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         imagePicker.delegate = self
         
-        self.view.backgroundColor = color.getColor()
-        
-        redSlider.value = Float(color.red)
-        greenSlider.value = Float(color.green)
-        blueSlider.value = Float(color.blue)
-        
-        redBackground.layer.borderColor = UIColor.red.cgColor
-        blueBackground.layer.borderColor = UIColor.blue.cgColor
-        greenBackground.layer.borderColor = UIColor.green.cgColor
-        
-        setRedBackground()
-        setBlueBackground()
-        setGreenBackground()
+        hueSlider.value = Float(color.hue)
+        saturationSlider.value = Float(color.saturation)
+        brightnessSlider.value = Float(color.brightness)
+        updateBackgrounds()
         
         if calledByPen {
             cameraRollButton.isHidden = true
+            
+            if eraserEnabled {
+                eraserStack.isHidden = false
+                eraserSwitch.isOn = eraserOn
+            }
+        } else {
+            cameraRollButton.isHidden = false
+            eraserStack.isHidden = true
         }
-    }
-    
-    func setRedBackground() {
-        redBackground.backgroundColor = UIColor(red: color.red, green: 0, blue: 0, alpha: 1)
-    }
-    func setGreenBackground() {
-        greenBackground.backgroundColor = UIColor(red: 0, green: color.green, blue: 0, alpha: 1)
-    }
-    func setBlueBackground() {
-        blueBackground.backgroundColor = UIColor(red: 0, green: 0, blue: color.blue, alpha: 1)
-    }
-    
-    func flip(_ val: CGFloat) -> CGFloat {
-        return 0.5 - (val - 0.5)
     }
     
     //=====================================================
     // Handles when the red slider is slid
     //=====================================================
-    @IBAction func onRedSlide(_ sender: UISlider) {
-        color.red = CGFloat(sender.value)
-        setRedBackground()
-        self.view.backgroundColor = color.getColor()
+    @IBAction func onHueSlide(_ sender: UISlider) {
+        color.hue = CGFloat(sender.value)
+        updateBackgrounds()
     }
     
-    //=====================================================
-    // Handles when the green slider is slid
-    //=====================================================
-    @IBAction func onGreenSlide(_ sender: UISlider) {
-        color.green = CGFloat(sender.value)
-        setGreenBackground()
-        self.view.backgroundColor = color.getColor()
+    @IBAction func onSaturationSlide(_ sender: UISlider) {
+        color.saturation = CGFloat(sender.value)
+        updateBackgrounds()
     }
     
-    //=====================================================
-    // Handles when the blue slider is slid
-    //=====================================================
-    @IBAction func onBlueSlide(_ sender: UISlider) {
-        color.blue = CGFloat(sender.value)
-        setBlueBackground()
-        self.view.backgroundColor = color.getColor()
+    @IBAction func onBrightnessSlide(_ sender: UISlider) {
+        color.brightness = CGFloat(sender.value)
+        updateBackgrounds()
+    }
+    
+    func updateBackgrounds() {
+        brightnessBackground.endColor = color.getMyColor()
+        brightnessBackground.setNeedsDisplay()
+        
+        saturationBackground.endColor = color.getMyColor()
+        saturationBackground.setNeedsDisplay()
+        
+        self.view.backgroundColor = color.getMyColor()
     }
     
     //=====================================================

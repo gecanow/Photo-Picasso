@@ -14,7 +14,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     @IBOutlet weak var myBackground: UIImageView!
     
     @IBOutlet weak var removeImageButton: UIButton!
-    @IBOutlet weak var myEraser: UISwitch!
     
     @IBOutlet weak var penColorButton: UIButton!
     @IBOutlet weak var canvasColorButton: UIButton!
@@ -28,8 +27,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var eraser = false
     var thickness = 3.0
     
-    var penColor = Color(r: 0, g: 0, b: 0)
-    var canvasColor = Color(r: 1, g: 1, b: 1)
+    var penColor = Color(h: 0.0, s: 1.0, b: 1.0)//(r: 0, g: 0, b: 0)
+    var canvasColor = Color(h: 0.5, s: 0.0, b: 1.0) //(r: 1, g: 1, b: 1)
     
     var isPenColor = true
     var didTapQuestion = false
@@ -83,17 +82,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     }
     
     //=====================================================
-    // Turns the eraser on/off
-    //=====================================================
-    @IBAction func onSwitched(_ sender: UISwitch) {
-        if sender.isOn {
-            eraser = true
-        } else {
-            eraser = false
-        }
-    }
-    
-    //=====================================================
     // Controls the width/thickness of the pen
     //=====================================================
     @IBAction func onSlide(_ sender: UISlider) {
@@ -124,7 +112,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         if eraser {
             myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
         } else {
-            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, starting: isBeginning))
+            myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getMyColor(), width: thickness, starting: isBeginning))
         }
         
         startPoint = endPoint
@@ -173,9 +161,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onTappedRemoveImage(_ sender: UIButton) {
         myBackground.image = nil
-        myDrawView.backgroundColor = canvasColor.getColor()
+        myDrawView.backgroundColor = canvasColor.getMyColor()
         sender.isHidden = true
-        myEraser.isEnabled = true
+        //myEraser.isEnabled = true
     }
     
     //=====================================================
@@ -239,9 +227,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         popoverPresentationController?.delegate = self
         
         // set up ui stuff
-        myDrawView.backgroundColor = canvasColor.getColor()
-        penColorButton.layer.backgroundColor = penColor.getColor().cgColor
-        canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
+        myDrawView.backgroundColor = canvasColor.getMyColor()
+        penColorButton.layer.backgroundColor = penColor.getMyColor().cgColor
+        canvasColorButton.layer.backgroundColor = canvasColor.getMyColor().cgColor
         myBackground.backgroundColor = UIColor.black
         myBackground.contentMode = .scaleAspectFit
     }
@@ -261,7 +249,13 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             
             if isPenColor {
                 dvc.color = penColor
+                dvc.eraserOn = eraser
                 dvc.calledByPen = true
+                
+                if self.myBackground.image != nil {
+                    dvc.eraserOn = false
+                    dvc.eraserEnabled = false
+                }
             } else {
                 dvc.color = canvasColor
                 dvc.calledByPen = false
@@ -288,11 +282,19 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         
         if isPenColor {
             penColor = ppc.color
-            penColorButton.layer.backgroundColor = penColor.getColor().cgColor
+            eraser = ppc.eraserSwitch.isOn
+            
+            if !eraser {
+                penColorButton.setImage(UIImage(named: "crayon outline"), for: .normal)
+                penColorButton.layer.backgroundColor = penColor.getMyColor().cgColor
+            } else {
+                penColorButton.setImage(UIImage(named: "eraser"), for: .normal)
+                penColorButton.layer.backgroundColor = UIColor.white.cgColor
+            }
         } else {
             canvasColor = ppc.color
-            canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
-            myDrawView.backgroundColor = canvasColor.getColor()
+            canvasColorButton.layer.backgroundColor = canvasColor.getMyColor().cgColor
+            myDrawView.backgroundColor = canvasColor.getMyColor()
             
             if ppc.backgroundImage.image != nil {
                 myBackground.image = ppc.backgroundImage.image
@@ -300,8 +302,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
                 removeImageButton.isHidden = false
                 
                 eraser = false
-                myEraser.isOn = false
-                myEraser.isEnabled = false
+                
+                //ppc.eraserSwitch.isOn = false
+                //ppc.eraserSwitch.isEnabled = false
             }
         }
     }

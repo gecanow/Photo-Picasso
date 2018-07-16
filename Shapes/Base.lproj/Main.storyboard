@@ -82,24 +82,6 @@
                                             <segue destination="nFh-b1-kfO" kind="presentation" modalTransitionStyle="flipHorizontal" id="jlf-xa-hNc"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="paW-Vo-VY4">
-                                        <rect key="frame" x="170" y="30" width="49" height="45.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Eraser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO7-FO-JXh">
-                                                <rect key="frame" x="0.0" y="0.0" width="49" height="14.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-H4-IPi">
-                                                <rect key="frame" x="0.0" y="14.5" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="onSwitched:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mnp-LG-z3a"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
                                     <button opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfi-2m-bk3">
                                         <rect key="frame" x="227" y="20" width="30" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -235,7 +217,6 @@
                         <outlet property="hideToolboxButton" destination="Nhg-NM-tUi" id="TXB-Bf-xup"/>
                         <outlet property="myBackground" destination="eZj-El-TWS" id="CpY-64-GDn"/>
                         <outlet property="myDrawView" destination="RPD-SL-DyW" id="Zzf-qG-YZi"/>
-                        <outlet property="myEraser" destination="cAd-H4-IPi" id="s47-Wz-sUC"/>
                         <outlet property="penColorButton" destination="sfi-2m-bk3" id="eBA-9q-BxV"/>
                         <outlet property="removeImageButton" destination="hLS-m3-XWP" id="BLc-JM-9UA"/>
                         <outlet property="toolBox" destination="PDn-xg-88H" id="W4X-g6-EL0"/>
@@ -269,77 +250,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Y8w-jv-9bD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NNM-oD-ZXV">
-                        <rect key="frame" x="0.0" y="0.0" width="210" height="220"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoI-RG-uvb">
-                                <rect key="frame" x="19" y="20" width="172" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HPK-K5-t1r">
-                                        <rect key="frame" x="8" y="4" width="156" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="onRedSlide:" destination="SPU-Jn-eqb" eventType="valueChanged" id="o5I-m2-3tR"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUl-0q-3sP">
-                                <rect key="frame" x="19" y="80" width="172" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ii2-x1-t0K">
-                                        <rect key="frame" x="8" y="4" width="156" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="onGreenSlide:" destination="SPU-Jn-eqb" eventType="valueChanged" id="h10-c7-653"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kae-Cp-qgp">
-                                <rect key="frame" x="19" y="136" width="172" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-Sg-v09">
-                                        <rect key="frame" x="8" y="4" width="156" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="onBlueSlide:" destination="SPU-Jn-eqb" eventType="valueChanged" id="cCu-bn-pm3"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6g-yp-V6K">
-                                <rect key="frame" x="84" y="177" width="43" height="43"/>
+                                <rect key="frame" x="99" y="147" width="43" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="XQF-2C-Uoj"/>
                                     <constraint firstAttribute="width" constant="43" id="caX-50-QqG"/>
@@ -349,26 +264,155 @@
                                     <action selector="didPressCameraRoll:" destination="SPU-Jn-eqb" eventType="touchUpInside" id="qnI-jO-IsZ"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OqD-Fm-yji" customClass="GradientView" customModule="Shapes" customModuleProvider="target">
+                                <rect key="frame" x="16" y="8" width="208" height="38"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hue spectrum" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-Wa-d5X">
+                                        <rect key="frame" x="20" y="0.0" width="168" height="38"/>
+                                    </imageView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="z4T-68-nCn">
+                                        <rect key="frame" x="6" y="5" width="196" height="30"/>
+                                        <connections>
+                                            <action selector="onHueSlide:" destination="SPU-Jn-eqb" eventType="valueChanged" id="tS7-gX-AQ4"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="z4T-68-nCn" firstAttribute="leading" secondItem="OqD-Fm-yji" secondAttribute="leading" constant="8" id="7Zz-oh-1eS"/>
+                                    <constraint firstItem="aqb-Wa-d5X" firstAttribute="top" secondItem="OqD-Fm-yji" secondAttribute="top" id="AcD-kx-O41"/>
+                                    <constraint firstAttribute="trailing" secondItem="z4T-68-nCn" secondAttribute="trailing" constant="8" id="EV7-yc-dda"/>
+                                    <constraint firstAttribute="bottom" secondItem="z4T-68-nCn" secondAttribute="bottom" constant="4" id="Ux0-ga-Wuv"/>
+                                    <constraint firstAttribute="height" constant="38" id="V1U-1e-Szs"/>
+                                    <constraint firstItem="aqb-Wa-d5X" firstAttribute="leading" secondItem="OqD-Fm-yji" secondAttribute="leading" constant="20" id="aOZ-px-jd9"/>
+                                    <constraint firstAttribute="bottom" secondItem="aqb-Wa-d5X" secondAttribute="bottom" id="d5i-1g-2Lf"/>
+                                    <constraint firstAttribute="trailing" secondItem="aqb-Wa-d5X" secondAttribute="trailing" constant="20" id="hci-bS-lNa"/>
+                                    <constraint firstItem="z4T-68-nCn" firstAttribute="top" secondItem="OqD-Fm-yji" secondAttribute="top" constant="5" id="rrf-11-jd8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.98431372549019602" green="0.050980392156862744" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.98431372549019602" green="0.15686274509803921" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tj1-6c-zN7" customClass="GradientView" customModule="Shapes" customModuleProvider="target">
+                                <rect key="frame" x="16" y="54" width="208" height="38"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g6u-PZ-4gw">
+                                        <rect key="frame" x="6" y="4" width="196" height="31"/>
+                                        <connections>
+                                            <action selector="onSaturationSlide:" destination="SPU-Jn-eqb" eventType="valueChanged" id="AcK-eO-BHy"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="UIO-cG-HPw"/>
+                                    <constraint firstItem="g6u-PZ-4gw" firstAttribute="top" secondItem="tj1-6c-zN7" secondAttribute="top" constant="4" id="d7P-XP-axp"/>
+                                    <constraint firstItem="g6u-PZ-4gw" firstAttribute="leading" secondItem="tj1-6c-zN7" secondAttribute="leading" constant="8" id="olf-1f-dbO"/>
+                                    <constraint firstAttribute="bottom" secondItem="g6u-PZ-4gw" secondAttribute="bottom" constant="4" id="qxH-RC-f2e"/>
+                                    <constraint firstAttribute="trailing" secondItem="g6u-PZ-4gw" secondAttribute="trailing" constant="8" id="tZY-6f-0Ec"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHY-pa-cuN" customClass="GradientView" customModule="Shapes" customModuleProvider="target">
+                                <rect key="frame" x="16" y="101" width="208" height="38"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="kX6-VA-Ncr">
+                                        <rect key="frame" x="6" y="4" width="196" height="31"/>
+                                        <connections>
+                                            <action selector="onBrightnessSlide:" destination="SPU-Jn-eqb" eventType="valueChanged" id="L0x-UN-S4e"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="kX6-VA-Ncr" firstAttribute="leading" secondItem="nHY-pa-cuN" secondAttribute="leading" constant="8" id="1Qb-zx-RNc"/>
+                                    <constraint firstAttribute="trailing" secondItem="kX6-VA-Ncr" secondAttribute="trailing" constant="8" id="29W-UA-lfP"/>
+                                    <constraint firstAttribute="height" constant="38" id="CRq-6I-lhQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="kX6-VA-Ncr" secondAttribute="bottom" constant="4" id="EH7-gO-5kf"/>
+                                    <constraint firstItem="kX6-VA-Ncr" firstAttribute="top" secondItem="nHY-pa-cuN" secondAttribute="top" constant="4" id="bXc-L4-MAh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gpT-xr-dzS">
+                                <rect key="frame" x="96" y="146.5" width="49" height="45.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eraser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NuJ-Cx-KIj">
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="udm-hx-Skx">
+                                        <rect key="frame" x="0.0" y="14.5" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45.5" id="HeO-rC-bfQ"/>
+                                    <constraint firstAttribute="width" constant="49" id="R2T-Xf-yGa"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Y8w-jv-9bD" firstAttribute="top" secondItem="D6g-yp-V6K" secondAttribute="bottom" id="jgA-lr-4qc"/>
-                            <constraint firstItem="D6g-yp-V6K" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leadingMargin" constant="67.5" id="qoE-fq-ZvY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="D6g-yp-V6K" secondAttribute="trailing" constant="67.5" id="uP1-AV-oAm"/>
+                            <constraint firstItem="tj1-6c-zN7" firstAttribute="top" secondItem="OqD-Fm-yji" secondAttribute="bottom" constant="8" id="0zF-JX-OeC"/>
+                            <constraint firstItem="D6g-yp-V6K" firstAttribute="centerX" secondItem="NNM-oD-ZXV" secondAttribute="centerX" id="1b7-Pa-VpM"/>
+                            <constraint firstItem="Y8w-jv-9bD" firstAttribute="top" secondItem="D6g-yp-V6K" secondAttribute="bottom" constant="10" id="1iz-kK-S3D"/>
+                            <constraint firstItem="OqD-Fm-yji" firstAttribute="trailing" secondItem="NNM-oD-ZXV" secondAttribute="trailingMargin" id="Ecp-6k-5cr"/>
+                            <constraint firstItem="nHY-pa-cuN" firstAttribute="trailing" secondItem="NNM-oD-ZXV" secondAttribute="trailingMargin" id="H1H-Fz-Udt"/>
+                            <constraint firstItem="tj1-6c-zN7" firstAttribute="trailing" secondItem="NNM-oD-ZXV" secondAttribute="trailingMargin" id="UZ6-q9-9dV"/>
+                            <constraint firstItem="nHY-pa-cuN" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leadingMargin" id="Z3y-fZ-2Dz"/>
+                            <constraint firstItem="tj1-6c-zN7" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leadingMargin" id="dh7-xk-9VW"/>
+                            <constraint firstItem="nHY-pa-cuN" firstAttribute="top" secondItem="tj1-6c-zN7" secondAttribute="bottom" constant="9" id="fU9-fN-nyh"/>
+                            <constraint firstItem="gpT-xr-dzS" firstAttribute="centerX" secondItem="NNM-oD-ZXV" secondAttribute="centerX" id="ki8-PP-G27"/>
+                            <constraint firstItem="OqD-Fm-yji" firstAttribute="leading" secondItem="NNM-oD-ZXV" secondAttribute="leadingMargin" id="ohr-DN-kfs"/>
+                            <constraint firstItem="OqD-Fm-yji" firstAttribute="top" secondItem="nTu-kj-aII" secondAttribute="bottom" constant="8" id="v7K-sz-hEc"/>
+                            <constraint firstItem="Y8w-jv-9bD" firstAttribute="top" secondItem="gpT-xr-dzS" secondAttribute="bottom" constant="8" id="zka-uE-emo"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="210" height="220"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="210" height="220"/>
+                    <size key="freeformSize" width="240" height="200"/>
                     <connections>
-                        <outlet property="blueBackground" destination="Kae-Cp-qgp" id="TUr-fR-ctY"/>
-                        <outlet property="blueSlider" destination="GBp-Sg-v09" id="3up-qb-Q7G"/>
+                        <outlet property="brightnessBackground" destination="nHY-pa-cuN" id="B3u-P6-F0Q"/>
+                        <outlet property="brightnessSlider" destination="kX6-VA-Ncr" id="1Qw-in-xCE"/>
                         <outlet property="cameraRollButton" destination="D6g-yp-V6K" id="1gh-2r-f8U"/>
-                        <outlet property="greenBackground" destination="YUl-0q-3sP" id="xzp-01-g5r"/>
-                        <outlet property="greenSlider" destination="ii2-x1-t0K" id="GBI-sz-9FV"/>
-                        <outlet property="redBackground" destination="aoI-RG-uvb" id="OMJ-uP-1aA"/>
-                        <outlet property="redSlider" destination="HPK-K5-t1r" id="U1X-L7-UXb"/>
+                        <outlet property="eraserStack" destination="gpT-xr-dzS" id="ikg-xV-T9f"/>
+                        <outlet property="eraserSwitch" destination="udm-hx-Skx" id="hVC-nA-gug"/>
+                        <outlet property="hueSlider" destination="z4T-68-nCn" id="Jwe-NK-mqg"/>
+                        <outlet property="saturationBackground" destination="tj1-6c-zN7" id="0OX-Q0-6wi"/>
+                        <outlet property="saturationSlider" destination="g6u-PZ-4gw" id="zRS-UV-mQM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RFk-M0-uvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,11 +717,12 @@
         <image name="camera" width="750" height="750"/>
         <image name="clear" width="550" height="550"/>
         <image name="crayon outline" width="398" height="1248"/>
+        <image name="hue spectrum" width="1024" height="1024"/>
         <image name="save" width="550" height="550"/>
         <image name="splatter" width="850" height="850"/>
         <image name="undo" width="550" height="550"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LbI-XL-jjv"/>
+        <segue reference="6KS-TD-4CO"/>
     </inferredMetricsTieBreakers>
 </document>
