@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawView: UIImageView {
+class DrawView: UIView {
     
     var points = [Line]()
     
@@ -25,12 +25,13 @@ class DrawView: UIImageView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         
-        var cgpointArr = [CGPoint]()
         if points.count > 0 {
             context?.beginPath()
             for line in points {
                 
                 context?.setLineWidth(CGFloat(line.thickness))
+                context?.setLineCap(.round)
+                context?.setBlendMode(.normal)
                 
                 if line.isEraser {
                     context?.setStrokeColor((self.backgroundColor?.cgColor)!)
@@ -38,50 +39,12 @@ class DrawView: UIImageView {
                     context?.setStrokeColor(line.color.cgColor)
                 }
                 
-                if line.startsATurn { cgpointArr = [CGPoint]() }
-                    
-                cgpointArr.append(line.start)
-                cgpointArr.append(line.end)
-                
-                
-                
-                context?.addLines(between: cgpointArr)
+                context?.move(to: line.start)
+                context?.addLine(to: line.end)
                 context?.strokePath()
                 line.drawn = true
             }
         }
-    }
-    
-    func drawLineFrom(line: Line) {//fromPoint: CGPoint, toPoint: CGPoint) {
-        
-        // 1
-        UIGraphicsBeginImageContext(frame.size)
-        let context = UIGraphicsGetCurrentContext()
-        self.image?.draw(in: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
-        
-        // 2
-        context?.move(to: line.start)
-        context?.addLine(to: line.end)
-        
-        // 3
-        context?.setLineCap(.round)
-        context?.setLineWidth(CGFloat(line.thickness))
-        
-        if line.isEraser {
-            context?.setStrokeColor((self.backgroundColor?.cgColor)!)
-        } else {
-            context?.setStrokeColor(line.color.cgColor)
-        }
-        
-        context?.setBlendMode(.normal)
-        
-        // 4
-        context?.strokePath()
-        
-        // 5
-        self.image = UIGraphicsGetImageFromCurrentImageContext()
-        self.alpha = 1.0//opacity
-        UIGraphicsEndImageContext()
     }
     
     //=====================================================

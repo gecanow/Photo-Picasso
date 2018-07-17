@@ -49,15 +49,15 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onPressedToolboxButton(_ sender: UIButton) {
         if sender.currentTitle == "Hide Toolbox" {
-            transformToolbox(toX: -self.toolBox.frame.width, newTitle: "Show Toolbox")
+            transformToolbox(toY: self.toolBox.frame.height+10, newTitle: "Show Toolbox")
         } else {
-            transformToolbox(toX: 0, newTitle: "Hide Toolbox")
+            transformToolbox(toY: 0, newTitle: "Hide Toolbox")
         }
     }
     
     @IBAction func onTappedToolbox(_ sender: UITapGestureRecognizer) {
         if hideToolboxButton.titleLabel?.text == "Show Toolbox" {
-            transformToolbox(toX: 0, newTitle: "Hide Toolbox")
+            transformToolbox(toY: 0, newTitle: "Hide Toolbox")
         }
     }
     
@@ -67,16 +67,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         } else {
             let point2 = sender.location(in: toolBox)
             
-            if dragPoint1!.x > point2.x {
-                transformToolbox(toX: -self.toolBox.frame.width, newTitle: "Show Toolbox")
+            if dragPoint1!.y < point2.y {
+                transformToolbox(toY: self.toolBox.frame.height, newTitle: "Show Toolbox")
             }
             dragPoint1 = nil
         }
     }
     
-    func transformToolbox(toX: CGFloat, newTitle: String) {
+    func transformToolbox(toY: CGFloat, newTitle: String) {
         UIView.animate(withDuration: 0.4, animations: {
-            self.toolBox.transform = CGAffineTransform(translationX: toX, y: 0)
+            self.toolBox.transform = CGAffineTransform(translationX: 0, y: toY)
         }) { (void) in
             self.hideToolboxButton.setTitle(newTitle, for: .normal)
         }
@@ -95,16 +95,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // first, merge the last drawing bc now you know they aren't undoing it
-        if myDrawView.image != nil {
-            UIGraphicsBeginImageContext(myDrawView.frame.size)
-            myBackground.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)
-            myDrawView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)//opacity)
-        
-            myBackground.image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-        
-            myDrawView.image = nil
-        }
+//        if myDrawView.image != nil {
+//            UIGraphicsBeginImageContext(myDrawView.frame.size)
+//            myBackground.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)
+//            myDrawView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)//opacity)
+//
+//            myBackground.image = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+//
+//            myDrawView.image = nil
+//        }
         
         startPoint = touches.first?.location(in: myDrawView)
         isBeginning = true
@@ -120,18 +120,14 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             let endPoint = touch.location(in: myDrawView)
             
             if eraser {
-                myDrawView.drawLineFrom(line: Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
+                myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
             } else {
-                myDrawView.drawLineFrom(line: Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, starting: isBeginning))
+                myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, starting: isBeginning))
             }
             isBeginning = false
             startPoint = endPoint
+            myDrawView.setNeedsDisplay()
         }
-    }
-    
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // did merge, now in touchesBegan
     }
     
     //=====================================================
@@ -142,6 +138,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         let clearAction = UIAlertAction(title: "Clear Drawing", style: .default) { (Void) in
             self.myDrawView.points = [Line]()
             self.myBackground.image = nil
+            self.myDrawView.setNeedsDisplay()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -154,7 +151,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles when the undo button is pressed
     //=====================================================
     @IBAction func onTappedUndo(_ sender: AnyObject) {
-        myDrawView.image = nil
+        myDrawView.undoLastMove()
     }
     
     //=====================================================
@@ -253,10 +250,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         popoverPresentationController?.delegate = self
         
         // set up ui stuff
-        myBackground.backgroundColor = canvasColor.getColor()
+        myDrawView.backgroundColor = canvasColor.getColor()
         penColorButton.layer.backgroundColor = penColor.getColor().cgColor
         canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
-        //myBackground.backgroundColor = UIColor.black
         myBackground.contentMode = .scaleAspectFit
     }
     
