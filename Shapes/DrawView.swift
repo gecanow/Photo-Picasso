@@ -32,6 +32,7 @@ class DrawView: UIView {
                 context?.setLineWidth(CGFloat(line.thickness))
                 context?.setLineCap(.round)
                 context?.setBlendMode(.normal)
+                context?.setAlpha(CGFloat(line.opacity))
                 
                 if line.isEraser {
                     context?.setStrokeColor((self.backgroundColor?.cgColor)!)

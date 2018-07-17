@@ -26,6 +26,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     
     var eraser = false
     var thickness = 3.0
+    var opacity = 1.0
     
     var penColor = Color(h: 0.0, s: 1.0, b: 1.0)
     var canvasColor = Color(h: 0.5, s: 0.0, b: 1.0)
@@ -49,7 +50,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onPressedToolboxButton(_ sender: UIButton) {
         if sender.currentTitle == "Hide Toolbox" {
-            transformToolbox(toY: self.toolBox.frame.height+10, newTitle: "Show Toolbox")
+            transformToolbox(toY: self.toolBox.frame.height, newTitle: "Show Toolbox")
         } else {
             transformToolbox(toY: 0, newTitle: "Hide Toolbox")
         }
@@ -77,6 +78,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     func transformToolbox(toY: CGFloat, newTitle: String) {
         UIView.animate(withDuration: 0.4, animations: {
             self.toolBox.transform = CGAffineTransform(translationX: 0, y: toY)
+            self.hideToolboxButton.transform = CGAffineTransform(translationX: 0, y: toY)
         }) { (void) in
             self.hideToolboxButton.setTitle(newTitle, for: .normal)
         }
@@ -89,23 +91,14 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         thickness = Double(sender.value) * 10 + 3
     }
     
+    @IBAction func onSlideAlpha(_ sender: UISlider) {
+        opacity = Double(sender.value)
+    }
+    
     //=====================================================
     // Handles when the touches begin
     //=====================================================
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        // first, merge the last drawing bc now you know they aren't undoing it
-//        if myDrawView.image != nil {
-//            UIGraphicsBeginImageContext(myDrawView.frame.size)
-//            myBackground.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)
-//            myDrawView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)//opacity)
-//
-//            myBackground.image = UIGraphicsGetImageFromCurrentImageContext()
-//            UIGraphicsEndImageContext()
-//
-//            myDrawView.image = nil
-//        }
-        
         startPoint = touches.first?.location(in: myDrawView)
         isBeginning = true
     }
@@ -120,9 +113,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             let endPoint = touch.location(in: myDrawView)
             
             if eraser {
-                myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, starting: isBeginning))
+                myDrawView.points.append(Line(begin: startPoint, close: endPoint, width: thickness, eraser: true, alpha: opacity, starting: isBeginning))
             } else {
-                myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, starting: isBeginning))
+                myDrawView.points.append(Line(begin: startPoint, close: endPoint, color: penColor.getColor(), width: thickness, alpha: opacity, starting: isBeginning))
             }
             isBeginning = false
             startPoint = endPoint
@@ -183,21 +176,12 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onTappedSave(_ sender: AnyObject) {
         //UIImageWriteToSavedPhotosAlbum(fullImage(), nil, nil, nil)
-        
-        //let actionSheet = UIAlertController(title: "Your Photo Has Been Saved!", message: nil, preferredStyle: .alert)
-        //let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        //actionSheet.addAction(okAction)
+//        let actionSheet = UIAlertController(title: "Your Photo Has Been Saved!", message: nil, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//        actionSheet.addAction(okAction)
         //self.present(actionSheet, animated: true, completion: nil)
         
-        UIGraphicsBeginImageContext(myBackground.bounds.size)
-        myBackground.image?.draw(in: CGRect(x: 0,
-                                            y: 0,
-                                            width: myBackground.frame.size.width,
-                                            height: myBackground.frame.size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        let activity = UIActivityViewController(activityItems: [image as Any], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [fullImage() as Any], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
     }
     
