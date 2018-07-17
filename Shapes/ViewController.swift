@@ -68,7 +68,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         } else {
             let point2 = sender.location(in: toolBox)
             
-            if dragPoint1!.y < point2.y {
+            if dragPoint1!.y+10 < point2.y {
                 transformToolbox(toY: self.toolBox.frame.height, newTitle: "Show Toolbox")
             }
             dragPoint1 = nil

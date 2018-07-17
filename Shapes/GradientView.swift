@@ -12,6 +12,7 @@ import UIKit
     
     @IBInspectable var startColor: UIColor = .white
     @IBInspectable var endColor: UIColor = .black
+    @IBInspectable var isVerticle: Bool = true
     
     // Only override draw() if you perform custom drawing.
     override func draw(_ rect: CGRect) {
@@ -27,7 +28,10 @@ import UIKit
                                   locations: colorLocations)!
         
         let startPoint = CGPoint.zero
-        let endPoint = CGPoint(x: bounds.width, y: 0)//0, y: bounds.height)
+        var endPoint = CGPoint(x: bounds.width, y: 0) // verticle
+        if !isVerticle {
+            endPoint = CGPoint(x: 0, y: bounds.height) // horizontal
+        }
         context.drawLinearGradient(gradient,
                                    start: startPoint,
                                    end: endPoint,
