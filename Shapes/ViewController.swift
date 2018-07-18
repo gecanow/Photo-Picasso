@@ -34,7 +34,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var isPenColor = true
     var didTapQuestion = false
     
-    var dragPoint1 : CGPoint?
     var isBeginning = false
     
     //=====================================================
@@ -59,19 +58,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     @IBAction func onTappedToolbox(_ sender: UITapGestureRecognizer) {
         if hideToolboxButton.titleLabel?.text == "Show Toolbox" {
             transformToolbox(toY: 0, newTitle: "Hide Toolbox")
-        }
-    }
-    
-    @IBAction func onDraggedToolBox(_ sender: UIPanGestureRecognizer) {
-        if dragPoint1 == nil {
-            dragPoint1 = sender.location(in: toolBox)
-        } else {
-            let point2 = sender.location(in: toolBox)
-            
-            if dragPoint1!.y+10 < point2.y {
-                transformToolbox(toY: self.toolBox.frame.height, newTitle: "Show Toolbox")
-            }
-            dragPoint1 = nil
         }
     }
     
@@ -291,7 +277,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             eraser = ppc.eraserSwitch.isOn
             
             if !eraser {
-                penColorButton.setImage(UIImage(named: "pencil"), for: .normal) //crayon outline
+                penColorButton.setImage(UIImage(named: "pencil2"), for: .normal) //crayon outline
                 penColorButton.layer.backgroundColor = penColor.getColor().cgColor
             } else {
                 penColorButton.setImage(UIImage(named: "eraser"), for: .normal)

@@ -38,7 +38,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="62" id="ygh-qM-5cw"/>
                                         </constraints>
-                                        <state key="normal" image="pencil"/>
+                                        <state key="normal" image="pencil2"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                 <integer key="value" value="1"/>
@@ -86,7 +86,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="62" id="qa6-Iq-c9Y"/>
                                         </constraints>
-                                        <state key="normal" image="iphone"/>
+                                        <state key="normal" image="easel"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                 <integer key="value" value="1"/>
@@ -132,9 +132,9 @@
                                         <rect key="frame" x="8" y="8" width="78" height="101"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPr-El-Yrp">
-                                                <rect key="frame" x="8" y="8" width="27" height="35"/>
+                                                <rect key="frame" x="8" y="8" width="27" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" backgroundImage="clear"/>
+                                                <state key="normal" image="garabage1"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
                                                         <integer key="value" value="1"/>
@@ -145,9 +145,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Po2-Xi-Wkb">
-                                                <rect key="frame" x="8" y="58" width="27" height="35"/>
+                                                <rect key="frame" x="8" y="66" width="27" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" backgroundImage="undo"/>
+                                                <state key="normal" image="undo1"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
                                                         <integer key="value" value="1"/>
@@ -158,11 +158,11 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i0-Je-gIr">
-                                                <rect key="frame" x="43" y="8" width="27" height="35"/>
+                                                <rect key="frame" x="43" y="8" width="27" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                 <state key="normal" title="?">
-                                                    <color key="titleColor" red="0.10980392156862745" green="0.64313725490196083" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="onTappedQuestion:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QYP-C1-LxM"/>
@@ -170,9 +170,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAn-uf-dxV">
-                                                <rect key="frame" x="43" y="58" width="27" height="35"/>
+                                                <rect key="frame" x="43" y="66" width="27" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" backgroundImage="save"/>
+                                                <state key="normal" image="save1"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
                                                         <integer key="value" value="1"/>
@@ -237,7 +237,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVerticle" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="gUh-HM-53V" appends="YES" id="3hF-qt-RiG"/>
                                     <outletCollection property="gestureRecognizers" destination="XnE-nO-1NY" appends="YES" id="CR6-4C-Ltz"/>
                                 </connections>
                             </view>
@@ -289,11 +288,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="gUh-HM-53V">
-                    <connections>
-                        <action selector="onDraggedToolBox:" destination="BYZ-38-t0r" id="GNA-e2-XqL"/>
-                    </connections>
-                </panGestureRecognizer>
                 <tapGestureRecognizer id="XnE-nO-1NY">
                     <connections>
                         <action selector="onTappedToolbox:" destination="BYZ-38-t0r" id="eNf-eS-OGl"/>
@@ -776,12 +770,12 @@
     </scenes>
     <resources>
         <image name="camera" width="750" height="750"/>
-        <image name="clear" width="550" height="550"/>
+        <image name="easel" width="506" height="750"/>
+        <image name="garabage1" width="414" height="414"/>
         <image name="hue spectrum" width="1024" height="1024"/>
-        <image name="iphone" width="344" height="660"/>
-        <image name="pencil" width="306" height="624"/>
-        <image name="save" width="550" height="550"/>
-        <image name="undo" width="550" height="550"/>
+        <image name="pencil2" width="306" height="624"/>
+        <image name="save1" width="414" height="414"/>
+        <image name="undo1" width="414" height="414"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6KS-TD-4CO"/>
