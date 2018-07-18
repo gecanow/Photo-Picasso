@@ -209,6 +209,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     
     @IBAction func onTappedQuestion(_ sender: AnyObject) {
         didTapQuestion = true
+        self.performSegue(withIdentifier: "MyUnwindSegue", sender: self)
     }
     
     //=====================================================
@@ -234,6 +235,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Prepare for segue to popover
     //=================================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("preparing for segue")
         if !didTapQuestion {
             let dvc = segue.destination as! PopoverViewController
             dvc.modalPresentationStyle = UIModalPresentationStyle.popover

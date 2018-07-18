@@ -18,6 +18,9 @@
 		8805EAC81DB81C4F002363EF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805EAC71DB81C4F002363EF /* PopoverViewController.swift */; };
 		8805EACA1DB86707002363EF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805EAC91DB86707002363EF /* Color.swift */; };
 		88B2A3501DB6C5BB00B2586C /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B2A34F1DB6C5BB00B2586C /* Line.swift */; };
+		CC6E38C420FF9B4100FC3B6F /* ExplanationOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E38C320FF9B4100FC3B6F /* ExplanationOneViewController.swift */; };
+		CC6E38C620FF9B6300FC3B6F /* ExplanationTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E38C520FF9B6300FC3B6F /* ExplanationTwoViewController.swift */; };
+		CC6E38C820FF9B7900FC3B6F /* ExplanationThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E38C720FF9B7900FC3B6F /* ExplanationThreeViewController.swift */; };
 		CCE8B41F20FCDD300088DDF0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE8B41E20FCDD300088DDF0 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,9 @@
 		8805EAC71DB81C4F002363EF /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = ../PopoverViewController.swift; sourceTree = "<group>"; };
 		8805EAC91DB86707002363EF /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		88B2A34F1DB6C5BB00B2586C /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		CC6E38C320FF9B4100FC3B6F /* ExplanationOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationOneViewController.swift; sourceTree = "<group>"; };
+		CC6E38C520FF9B6300FC3B6F /* ExplanationTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationTwoViewController.swift; sourceTree = "<group>"; };
+		CC6E38C720FF9B7900FC3B6F /* ExplanationThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationThreeViewController.swift; sourceTree = "<group>"; };
 		CCE8B41E20FCDD300088DDF0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +120,7 @@
 				8804BC531DB57177005114EE /* DrawView.swift */,
 				88B2A34F1DB6C5BB00B2586C /* Line.swift */,
 				8804BC291DB56AF2005114EE /* Main.storyboard */,
+				CC6E38C920FF9B8900FC3B6F /* Explanation View Controllers */,
 				CCE8B41E20FCDD300088DDF0 /* GradientView.swift */,
 				8804BC2C1DB56AF2005114EE /* Assets.xcassets */,
 				8804BC2E1DB56AF2005114EE /* LaunchScreen.storyboard */,
@@ -138,6 +145,16 @@
 				8804BC471DB56AF2005114EE /* Info.plist */,
 			);
 			path = ShapesUITests;
+			sourceTree = "<group>";
+		};
+		CC6E38C920FF9B8900FC3B6F /* Explanation View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E38C320FF9B4100FC3B6F /* ExplanationOneViewController.swift */,
+				CC6E38C520FF9B6300FC3B6F /* ExplanationTwoViewController.swift */,
+				CC6E38C720FF9B7900FC3B6F /* ExplanationThreeViewController.swift */,
+			);
+			path = "Explanation View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,8 +302,11 @@
 				8805EAC81DB81C4F002363EF /* PopoverViewController.swift in Sources */,
 				8804BC261DB56AF2005114EE /* AppDelegate.swift in Sources */,
 				CCE8B41F20FCDD300088DDF0 /* GradientView.swift in Sources */,
+				CC6E38C620FF9B6300FC3B6F /* ExplanationTwoViewController.swift in Sources */,
+				CC6E38C420FF9B4100FC3B6F /* ExplanationOneViewController.swift in Sources */,
 				8804BC541DB57177005114EE /* DrawView.swift in Sources */,
 				8805EACA1DB86707002363EF /* Color.swift in Sources */,
+				CC6E38C820FF9B7900FC3B6F /* ExplanationThreeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
