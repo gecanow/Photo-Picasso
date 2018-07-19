@@ -209,7 +209,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     
     @IBAction func onTappedQuestion(_ sender: AnyObject) {
         didTapQuestion = true
-        self.performSegue(withIdentifier: "MyUnwindSegue", sender: self)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "Tutorial")
+        self.present(vc, animated: true, completion: nil)
     }
     
     //=====================================================
@@ -235,7 +237,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Prepare for segue to popover
     //=================================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("preparing for segue")
         if !didTapQuestion {
             let dvc = segue.destination as! PopoverViewController
             dvc.modalPresentationStyle = UIModalPresentationStyle.popover
@@ -256,9 +257,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             }
         
             dvc.backgroundImage = myBackground
-        } else {
-            let dvc = segue.destination as! ExplanationOneViewController
-            dvc.didTapQuestion = true
         }
     }
     

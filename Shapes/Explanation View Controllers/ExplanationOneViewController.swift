@@ -18,13 +18,6 @@ class ExplanationOneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if !didTapQuestion {
-//            print("traversing to VC")
-//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
-//            self.present(vc, animated: true, completion: nil)
-//        }
         pullWelcomeLabel()
     }
     
@@ -65,6 +58,4 @@ class ExplanationOneViewController: UIViewController {
             performSegue(withIdentifier: "firstExplanationSegue", sender: nil)
         }
     }
-    
-    @IBAction func unwindToBeginning(segue: UIStoryboardSegue) {}
 }
