@@ -256,6 +256,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
             }
         
             dvc.backgroundImage = myBackground
+        } else {
+            let dvc = segue.destination as! ExplanationOneViewController
+            dvc.didTapQuestion = true
         }
     }
     
