@@ -59,7 +59,9 @@ class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     //=====================================================
-    // Handles when the red slider is slid
+    // 1 - Handles when the hue slider is slid
+    // 2 - Handles when the saturation slider is slid
+    // 3 - Handles when the brightness slider is slid
     //=====================================================
     @IBAction func onHueSlide(_ sender: UISlider) {
         color.hue = CGFloat(sender.value)
@@ -76,6 +78,10 @@ class PopoverViewController: UIViewController, UIImagePickerControllerDelegate, 
         updateBackgrounds()
     }
     
+    //=====================================================
+    // Updates the color of the slider backgrounds and
+    // popover background
+    //=====================================================
     func updateBackgrounds() {
         brightnessBackground.endColor = color.getColor()
         brightnessBackground.setNeedsDisplay()

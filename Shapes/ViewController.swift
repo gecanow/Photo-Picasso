@@ -35,6 +35,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     var didTapQuestion = false
     
     var isBeginning = false
+    var savedPoints = [Line]()
+    var savedPhoto : UIImage?
     
     //=====================================================
     // VIEW DID LOAD FUNCTION
@@ -48,25 +50,21 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles when the toolbox button is tapped
     //=====================================================
     @IBAction func onPressedToolboxButton(_ sender: UIButton) {
-        if sender.currentTitle == "Hide Toolbox" {
-            transformToolbox(toY: self.toolBox.frame.height, newTitle: "Show Toolbox")
+        if sender.tag == 0 { //currentTitle == "Hide Toolbox" {
+            transformToolbox(toY: self.toolBox.frame.height, newTag: 1)//newTitle: "Show Toolbox")
         } else {
-            transformToolbox(toY: 0, newTitle: "Hide Toolbox")
+            transformToolbox(toY: 0, newTag: 0)//newTitle: "Hide Toolbox")
         }
     }
     
-    @IBAction func onTappedToolbox(_ sender: UITapGestureRecognizer) {
-        if hideToolboxButton.titleLabel?.text == "Show Toolbox" {
-            transformToolbox(toY: 0, newTitle: "Hide Toolbox")
-        }
-    }
-    
-    func transformToolbox(toY: CGFloat, newTitle: String) {
+    func transformToolbox(toY: CGFloat, newTag: Int) {
         UIView.animate(withDuration: 0.4, animations: {
             self.toolBox.transform = CGAffineTransform(translationX: 0, y: toY)
             self.hideToolboxButton.transform = CGAffineTransform(translationX: 0, y: toY)
         }) { (void) in
-            self.hideToolboxButton.setTitle(newTitle, for: .normal)
+            let imageNames = ["down", "up"]
+            self.hideToolboxButton.setImage(UIImage(named: imageNames[newTag]), for: .normal)
+            self.hideToolboxButton.tag = newTag
         }
     }
     
@@ -161,12 +159,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     // Handles saving the image to the user's library
     //=====================================================
     @IBAction func onTappedSave(_ sender: AnyObject) {
-        //UIImageWriteToSavedPhotosAlbum(fullImage(), nil, nil, nil)
-//        let actionSheet = UIAlertController(title: "Your Photo Has Been Saved!", message: nil, preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//        actionSheet.addAction(okAction)
-        //self.present(actionSheet, animated: true, completion: nil)
-        
         let activity = UIActivityViewController(activityItems: [fullImage() as Any], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
     }
@@ -207,10 +199,16 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         return image!
     }
     
+    //=====================================================
+    // Segues to the tutorial VC if ? is tapped
+    //=====================================================
     @IBAction func onTappedQuestion(_ sender: AnyObject) {
         didTapQuestion = true
+        
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "Tutorial")
+        let vc = storyBoard.instantiateViewController(withIdentifier: "Tutorial") as! ExplanationOneViewController
+        vc.savedPoints = myDrawView.points // save the drawing
+        vc.savedPhoto = myBackground.image // save the background image
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -227,6 +225,18 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         penColorButton.layer.backgroundColor = penColor.getColor().cgColor
         canvasColorButton.layer.backgroundColor = canvasColor.getColor().cgColor
         myBackground.contentMode = .scaleAspectFit
+        
+        // resort to anything saved, is applicable
+        if !savedPoints.isEmpty {
+            myDrawView.points = savedPoints
+        }
+        if savedPhoto != nil {
+            myBackground.image = savedPhoto
+            
+            myDrawView.backgroundColor = UIColor.clear
+            removeImageButton.isHidden = false
+            eraser = false
+        }
     }
     
     //=================================================
@@ -297,9 +307,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
                 removeImageButton.isHidden = false
                 
                 eraser = false
-                
-                //ppc.eraserSwitch.isOn = false
-                //ppc.eraserSwitch.isEnabled = false
             }
         }
     }

@@ -14,7 +14,9 @@ import UIKit
     @IBInspectable var endColor: UIColor = .black
     @IBInspectable var isVerticle: Bool = true
     
-    // Only override draw() if you perform custom drawing.
+    //=====================================================
+    // Draws a graident background on self
+    //=====================================================
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         let colors = [startColor.cgColor, endColor.cgColor]

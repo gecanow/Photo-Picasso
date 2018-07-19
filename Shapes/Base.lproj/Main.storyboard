@@ -235,22 +235,35 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isVerticle" value="NO"/>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="XnE-nO-1NY" appends="YES" id="CR6-4C-Ltz"/>
-                                </connections>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLS-m3-XWP">
-                                <rect key="frame" x="12" y="12" width="83" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Remove Image"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLS-m3-XWP">
+                                <rect key="frame" x="12" y="20" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="RPp-G8-2i6"/>
+                                    <constraint firstAttribute="width" constant="40" id="d1b-yS-itG"/>
+                                </constraints>
+                                <state key="normal" title="Remove Image" image="remove camera"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onTappedRemoveImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xFy-CC-qiR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhg-NM-tUi">
-                                <rect key="frame" x="8" y="521" width="85" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Hide Toolbox"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhg-NM-tUi">
+                                <rect key="frame" x="4" y="528" width="39" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="nqU-eL-dWa"/>
+                                    <constraint firstAttribute="width" constant="39" id="s1V-db-xTn"/>
+                                </constraints>
+                                <state key="normal" title="Hide Toolbox" image="down"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onPressedToolboxButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rpn-uE-Vd2"/>
                                 </connections>
@@ -262,18 +275,16 @@
                             <constraint firstItem="eZj-El-TWS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4EM-JV-17P"/>
                             <constraint firstAttribute="trailing" secondItem="eZj-El-TWS" secondAttribute="trailing" id="5ed-Cr-qMN"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="q2n-UU-fnE" secondAttribute="bottom" id="BOK-9y-1WR"/>
-                            <constraint firstItem="Nhg-NM-tUi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="G9z-ch-W3Y"/>
+                            <constraint firstItem="Nhg-NM-tUi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="4" id="G9z-ch-W3Y"/>
                             <constraint firstItem="eZj-El-TWS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HYe-X4-pIW"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Nhg-NM-tUi" secondAttribute="trailing" constant="20" symbolic="YES" id="PsJ-S4-56F"/>
-                            <constraint firstItem="hLS-m3-XWP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="12" id="Xrx-sc-Tic"/>
+                            <constraint firstItem="hLS-m3-XWP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="Xrx-sc-Tic"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PDn-xg-88H" secondAttribute="bottom" id="bbw-GQ-are"/>
                             <constraint firstAttribute="trailing" secondItem="PDn-xg-88H" secondAttribute="trailing" id="cWA-Ka-K5q"/>
                             <constraint firstItem="q2n-UU-fnE" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gDv-ry-5s8"/>
                             <constraint firstItem="q2n-UU-fnE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ivX-EX-OF7"/>
                             <constraint firstItem="hLS-m3-XWP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="12" id="phv-28-osw"/>
-                            <constraint firstItem="PDn-xg-88H" firstAttribute="top" secondItem="Nhg-NM-tUi" secondAttribute="bottom" id="qU6-dA-e0Y"/>
+                            <constraint firstItem="PDn-xg-88H" firstAttribute="top" secondItem="Nhg-NM-tUi" secondAttribute="bottom" constant="4" id="qU6-dA-e0Y"/>
                             <constraint firstItem="PDn-xg-88H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="r3Y-gL-QmC"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hLS-m3-XWP" secondAttribute="trailing" constant="20" symbolic="YES" id="rvY-Os-hqJ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eZj-El-TWS" secondAttribute="bottom" id="vId-ib-LZY"/>
                             <constraint firstAttribute="trailing" secondItem="q2n-UU-fnE" secondAttribute="trailing" id="zyy-ze-CkV"/>
                         </constraints>
@@ -289,11 +300,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="XnE-nO-1NY">
-                    <connections>
-                        <action selector="onTappedToolbox:" destination="BYZ-38-t0r" id="eNf-eS-OGl"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2837.5999999999999" y="21.139430284857571"/>
         </scene>
@@ -493,7 +499,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Photo Picasso!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MvM-1X-mmu">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Photo Picasso!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MvM-1X-mmu">
                                 <rect key="frame" x="16" y="28" width="343" height="103"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="43"/>
                                 <nil key="textColor"/>
@@ -693,6 +699,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-yV-BXs">
+                                <rect key="frame" x="4" y="528" width="39" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="jj9-Os-eqe"/>
+                                    <constraint firstAttribute="height" constant="18" id="lpa-Em-fSO"/>
+                                </constraints>
+                                <state key="normal" title="Hide Toolbox" image="down"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onPressedToolboxButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CSF-KH-maI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -703,6 +725,8 @@
                             <constraint firstItem="AWe-BI-sLi" firstAttribute="top" secondItem="1wh-q0-EXW" secondAttribute="bottom" id="H8V-CH-XPX"/>
                             <constraint firstItem="gOU-Wn-TvL" firstAttribute="centerY" secondItem="pcG-7X-wvy" secondAttribute="centerY" id="Jha-h2-Xpf"/>
                             <constraint firstItem="MvM-1X-mmu" firstAttribute="top" secondItem="1gQ-sL-jQN" secondAttribute="bottom" constant="8" id="TsM-Vb-OjP"/>
+                            <constraint firstItem="JUM-yV-BXs" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leading" constant="4" id="YNz-PA-PTv"/>
+                            <constraint firstItem="1wh-q0-EXW" firstAttribute="top" secondItem="JUM-yV-BXs" secondAttribute="bottom" constant="4" id="ZTg-Ay-9ka"/>
                             <constraint firstAttribute="trailing" secondItem="1wh-q0-EXW" secondAttribute="trailing" id="bPS-Hv-Sry"/>
                             <constraint firstItem="1wh-q0-EXW" firstAttribute="top" secondItem="XzR-7U-23k" secondAttribute="bottom" constant="8" id="e0r-dQ-a7f"/>
                             <constraint firstItem="MvM-1X-mmu" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leadingMargin" id="rOF-Ql-QyA"/>
@@ -1018,10 +1042,12 @@
     </scenes>
     <resources>
         <image name="camera" width="750" height="750"/>
+        <image name="down" width="620" height="328"/>
         <image name="easel" width="506" height="750"/>
         <image name="garabage1" width="414" height="414"/>
         <image name="hue spectrum" width="1024" height="1024"/>
         <image name="pencil2" width="306" height="624"/>
+        <image name="remove camera" width="1112" height="924"/>
         <image name="save1" width="414" height="414"/>
         <image name="undo1" width="414" height="414"/>
     </resources>
