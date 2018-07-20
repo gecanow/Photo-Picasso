@@ -116,12 +116,9 @@
 				8804BC251DB56AF2005114EE /* AppDelegate.swift */,
 				8804BC271DB56AF2005114EE /* ViewController.swift */,
 				8805EAC71DB81C4F002363EF /* PopoverViewController.swift */,
-				8805EAC91DB86707002363EF /* Color.swift */,
-				8804BC531DB57177005114EE /* DrawView.swift */,
-				88B2A34F1DB6C5BB00B2586C /* Line.swift */,
 				8804BC291DB56AF2005114EE /* Main.storyboard */,
 				CC6E38C920FF9B8900FC3B6F /* Explanation View Controllers */,
-				CCE8B41E20FCDD300088DDF0 /* GradientView.swift */,
+				CC0CC5402102309F000810D1 /* Custom Views and Objects */,
 				8804BC2C1DB56AF2005114EE /* Assets.xcassets */,
 				8804BC2E1DB56AF2005114EE /* LaunchScreen.storyboard */,
 				8804BC311DB56AF2005114EE /* Info.plist */,
@@ -145,6 +142,17 @@
 				8804BC471DB56AF2005114EE /* Info.plist */,
 			);
 			path = ShapesUITests;
+			sourceTree = "<group>";
+		};
+		CC0CC5402102309F000810D1 /* Custom Views and Objects */ = {
+			isa = PBXGroup;
+			children = (
+				88B2A34F1DB6C5BB00B2586C /* Line.swift */,
+				8805EAC91DB86707002363EF /* Color.swift */,
+				CCE8B41E20FCDD300088DDF0 /* GradientView.swift */,
+				8804BC531DB57177005114EE /* DrawView.swift */,
+			);
+			path = "Custom Views and Objects";
 			sourceTree = "<group>";
 		};
 		CC6E38C920FF9B8900FC3B6F /* Explanation View Controllers */ = {

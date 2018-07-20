@@ -715,19 +715,28 @@
                                     <action selector="onPressedToolboxButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CSF-KH-maI"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can hide or show the toolbox using the down arrow." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYf-db-7GM">
+                                <rect key="frame" x="4" y="450.5" width="171" height="50.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="1wh-q0-EXW" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leading" id="03l-a0-tep"/>
+                            <constraint firstItem="XzR-7U-23k" firstAttribute="top" secondItem="tYf-db-7GM" secondAttribute="bottom" constant="16" id="28K-cg-zN2"/>
                             <constraint firstItem="gOU-Wn-TvL" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leadingMargin" constant="8" id="4ea-wi-haR"/>
                             <constraint firstItem="MvM-1X-mmu" firstAttribute="trailing" secondItem="pcG-7X-wvy" secondAttribute="trailingMargin" id="9pw-6A-1SF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XzR-7U-23k" secondAttribute="trailing" id="BtW-8u-Zrg"/>
+                            <constraint firstAttribute="trailing" secondItem="tYf-db-7GM" secondAttribute="trailing" constant="200" id="CBK-fZ-Sbl"/>
                             <constraint firstItem="AWe-BI-sLi" firstAttribute="top" secondItem="1wh-q0-EXW" secondAttribute="bottom" id="H8V-CH-XPX"/>
                             <constraint firstItem="gOU-Wn-TvL" firstAttribute="centerY" secondItem="pcG-7X-wvy" secondAttribute="centerY" id="Jha-h2-Xpf"/>
                             <constraint firstItem="MvM-1X-mmu" firstAttribute="top" secondItem="1gQ-sL-jQN" secondAttribute="bottom" constant="8" id="TsM-Vb-OjP"/>
                             <constraint firstItem="JUM-yV-BXs" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leading" constant="4" id="YNz-PA-PTv"/>
                             <constraint firstItem="1wh-q0-EXW" firstAttribute="top" secondItem="JUM-yV-BXs" secondAttribute="bottom" constant="4" id="ZTg-Ay-9ka"/>
                             <constraint firstAttribute="trailing" secondItem="1wh-q0-EXW" secondAttribute="trailing" id="bPS-Hv-Sry"/>
+                            <constraint firstItem="tYf-db-7GM" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leading" constant="4" id="dkg-xC-6lB"/>
                             <constraint firstItem="1wh-q0-EXW" firstAttribute="top" secondItem="XzR-7U-23k" secondAttribute="bottom" constant="8" id="e0r-dQ-a7f"/>
                             <constraint firstItem="MvM-1X-mmu" firstAttribute="leading" secondItem="pcG-7X-wvy" secondAttribute="leadingMargin" id="rOF-Ql-QyA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gOU-Wn-TvL" secondAttribute="trailing" constant="8" id="rg2-d8-N7m"/>
@@ -735,6 +744,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downArrow" destination="JUM-yV-BXs" id="SFI-1m-pru"/>
+                        <outlet property="hideOrShow" destination="tYf-db-7GM" id="23c-TN-lpu"/>
                         <outlet property="tapAnywhereLabel" destination="gOU-Wn-TvL" id="t2h-8b-LbU"/>
                         <outlet property="toolBoxLabel" destination="XzR-7U-23k" id="ylP-9H-fXv"/>
                         <outlet property="welcomeLabel" destination="MvM-1X-mmu" id="0IF-f1-chy"/>

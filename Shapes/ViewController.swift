@@ -115,6 +115,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
         let clearAction = UIAlertAction(title: "Clear Drawing", style: .default) { (Void) in
             self.myDrawView.points = [Line]()
             self.myBackground.image = nil
+            self.removeImageButton.isHidden = true
             self.myDrawView.setNeedsDisplay()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

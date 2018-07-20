@@ -13,6 +13,9 @@ class ExplanationOneViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var toolBoxLabel: UILabel!
     @IBOutlet weak var tapAnywhereLabel: UILabel!
+    @IBOutlet weak var hideOrShow: UILabel!
+    @IBOutlet weak var downArrow: UIButton!
+    
     var canTranslate = false
     var canMoveOn = false
     var savedPoints = [Line]()
@@ -58,12 +61,11 @@ class ExplanationOneViewController: UIViewController {
     }
     
     func translateToolBoxLabel() {
-        self.toolBoxLabel.text = "Which you can hide or show using the arrow."
+        self.toolBoxLabel.isHidden = true
+        self.hideOrShow.isHidden = false
         UIView.animate(withDuration: 0.5, animations: {
-            self.toolBoxLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-            self.toolBoxLabel.transform = CGAffineTransform(translationX: -5, y: -20)
+            self.downArrow.transform = CGAffineTransform(translationX: 15, y: -20)
         }) { (bool) in
-            self.toolBoxLabel.textAlignment = .left
             self.canMoveOn = true
         }
     }
