@@ -161,6 +161,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     //=====================================================
     @IBAction func onTappedSave(_ sender: AnyObject) {
         let activity = UIActivityViewController(activityItems: [fullImage() as Any], applicationActivities: nil)
+        activity.popoverPresentationController?.sourceView = self.view
         present(activity, animated: true, completion: nil)
     }
     
